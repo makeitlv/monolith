@@ -24,6 +24,36 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		rm -Rf tmp/
 	fi
 
+	if [ ! -f bin/phpcs.phar ]; then
+		wget -O bin/phpcs.phar https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.7.2/phpcs.phar
+
+		chmod +x bin/phpcs.phar
+	fi
+
+	if [ ! -f bin/phpcbf.phar ]; then
+		wget -O bin/phpcbf.phar https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.7.2/phpcbf.phar
+
+		chmod +x bin/phpcbf.phar
+	fi
+
+	if [ ! -f bin/phpcpd.phar ]; then
+		wget -O bin/phpcpd.phar https://phar.phpunit.de/phpcpd-6.0.3.phar
+
+		chmod +x bin/phpcpd.phar
+	fi
+
+	if [ ! -f bin/psalm.phar ]; then
+		wget -O bin/psalm.phar https://github.com/vimeo/psalm/releases/download/5.7.7/psalm.phar
+
+		chmod +x bin/psalm.phar
+	fi
+
+	if [ ! -f bin/deptrac.phar ]; then
+		wget -O bin/deptrac.phar https://github.com/qossmic/deptrac/releases/download/1.0.2/deptrac.phar
+
+		chmod +x bin/deptrac.phar
+	fi
+
 	if [ "$APP_ENV" != 'prod' ]; then
 		composer install --prefer-dist --no-progress --no-interaction
 	fi
