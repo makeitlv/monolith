@@ -1,0 +1,60 @@
+{
+  "commit-msg": {
+    "enabled": false,
+    "actions": []
+  },
+  "pre-push": {
+    "enabled": false,
+    "actions": []
+  },
+  "pre-commit": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "./bin/phpcs.phar --standard=phpcs.xml",
+        "options": []
+      },
+      {
+        "action": "./bin/phpcpd.phar --fuzzy src/ config/",
+        "options": []
+      },
+      {
+        "action": "./bin/psalm.phar",
+        "options": []
+      },
+      {
+        "action": "./bin/deptrac.phar analyse",
+        "options": []
+      }
+    ]
+  },
+  "prepare-commit-msg": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-commit": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-merge": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-checkout": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-rewrite": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-change": {
+    "enabled": false,
+    "actions": []
+  },
+  "config": {
+    "fail-on-first-error": false,
+    "run-path": "./bin/captainhook.phar",
+    "php-path": "./docker/php/php"
+  }
+}
