@@ -9,6 +9,9 @@ if [ $# -gt 0 ]; then
         shift 1
         docker-compose exec php composer "$@"
         docker-compose exec php chown -R $(id -u):$(id -g) .
+    elif [ "$1" == "fix" ]; then
+        shift 1
+        docker-compose exec php php -d memory_limit=-1 ./bin/phpcbf.phar
     elif [ "$1" == "qa" ]; then
         shift 1
         docker-compose exec php php -d memory_limit=-1 ./bin/phpcs.phar --standard=phpcs.xml
