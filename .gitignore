@@ -1,6 +1,8 @@
 .phpcs-cache
 .deptrac.cache
 /bin/*.phar
+/public/phpmetrics
+.vscode
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

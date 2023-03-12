@@ -1,0 +1,8 @@
+{
+  "composer": true,
+  "includes": ["src"],
+  "excludes": ["tests"],
+  "report": {
+    "html": "./public/phpmetrics/"
+  }
+}

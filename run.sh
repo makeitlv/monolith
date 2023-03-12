@@ -12,6 +12,9 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "fix" ]; then
         shift 1
         docker-compose exec -T php php -d memory_limit=-1 ./bin/phpcbf.phar
+    elif [ "$1" == "metrics" ]; then
+        shift 1
+        docker-compose exec -T php php -d memory_limit=-1 ./vendor/bin/phpmetrics "$@" --config=phpmetrics.json --quiet
     elif [ "$1" == "qa" ]; then
         shift 1
         docker-compose exec -T php php -d memory_limit=-1 ./bin/phpcs.phar --standard=phpcs.xml
