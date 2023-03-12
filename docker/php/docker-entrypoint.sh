@@ -58,6 +58,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		wget -O bin/captainhook.phar https://github.com/captainhookphp/captainhook/releases/download/5.15.2/captainhook.phar
 
 		chmod +x bin/captainhook.phar
+		bin/captainhook.phar install -f -s
 	fi
 
 	if [ "$APP_ENV" != 'prod' ]; then
