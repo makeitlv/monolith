@@ -8,14 +8,25 @@ jobs:
         steps:
             - name: Check out the repository
               uses: actions/checkout@v2
-            - name: Build the stack
-              run: DOCKER_BUILDKIT=1 docker-compose up -d
+
+            - name: Pull the latest image to build
+              run: docker-compose pull
+
+            - name: Saves a list of existing images
+              uses: satackey/action-docker-layer-caching@v0.0.11
+              continue-on-error: true
+
+            - name: Spin up services
+              run: docker-compose up -d
+
             - name: Install project packages
               run: |
                   ./run.sh composer install --ignore-platform-reqs --no-ansi --no-interaction --no-scripts
                   ./run.sh composer dump-autoload --optimize --classmap-authoritative
                   ./run.sh composer check-platform-reqs
+
             - name: Check code style
               run: ./run.sh qa
+
             - name: Run tests
               run: ./run.sh test
