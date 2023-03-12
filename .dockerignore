@@ -28,3 +28,16 @@ vendor/
 .env.local
 .env.local.php
 .env.test
+run.sh
+psalm.xml
+phpunit.xml.dist
+phpcs.xml
+LICENSE
+README.md
+deptrac.yaml
+captainhook.json
+.gitignore
+.gitattributes
+docker/php/php
+bin/*.phar
+bin/phpunit
