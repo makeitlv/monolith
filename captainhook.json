@@ -1,7 +1,12 @@
 {
   "pre-push": {
-    "enabled": false,
-    "actions": []
+    "enabled": true,
+    "actions": [
+      {
+        "action": "./bin/phpunit",
+        "options": []
+      }
+    ]
   },
   "pre-commit": {
     "enabled": true,
