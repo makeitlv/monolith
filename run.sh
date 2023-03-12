@@ -20,10 +20,6 @@ if [ $# -gt 0 ]; then
         docker-compose exec php php -d memory_limit=-1 ./bin/deptrac.phar analyse
     elif [ "$1" == "test" ]; then
         shift 1
-        docker-compose exec php php -d memory_limit=-1 bin/console cache:clear --env=test
-        docker-compose exec php php -d memory_limit=-1 bin/console doctrine:database:create --env=test --if-not-exists
-        docker-compose exec php php -d memory_limit=-1 bin/console doctrine:schema:drop --env=test --force
-        docker-compose exec php php -d memory_limit=-1 bin/console doctrine:schema:create --env=test
         docker-compose exec php php -d memory_limit=-1 ./bin/phpunit "$@"
     else
         echo "Unknown command"
