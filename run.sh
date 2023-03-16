@@ -20,7 +20,8 @@ if [ $# -gt 0 ]; then
         docker-compose exec -T php php -d memory_limit=-1 ./bin/phpcs.phar --standard=phpcs.xml
         docker-compose exec -T php php -d memory_limit=-1 ./bin/phpcpd.phar --fuzzy src/ config/
         docker-compose exec -T php php -d memory_limit=-1 ./bin/psalm.phar
-        docker-compose exec -T php php -d memory_limit=-1 ./bin/deptrac.phar analyse
+        docker-compose exec -T php php -d memory_limit=-1 ./bin/deptrac.phar analyse --report-uncovered --fail-on-uncovered --no-progress --config-file=deptrac.layers.yaml
+        docker-compose exec -T php php -d memory_limit=-1 ./bin/deptrac.phar analyse --report-uncovered --fail-on-uncovered --no-progress --config-file=deptrac.modules.yaml
     elif [ "$1" == "test" ]; then
         shift 1
         docker-compose exec -T php php -d memory_limit=-1 ./bin/phpunit "$@"

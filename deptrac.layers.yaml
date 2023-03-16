@@ -1,0 +1,41 @@
+deptrac:
+    paths:
+        - ./src
+
+    layers:
+        - name: Domain
+          collectors:
+              - type: directory
+                regex: /src/\w+/Domain/.*
+
+        - name: Application
+          collectors:
+              - type: directory
+                regex: /src/\w+/Application/.*
+
+        - name: Infrastructure
+          collectors:
+              - type: directory
+                regex: /src/\w+/Infrastructure/.*
+
+        - name: Presentation
+          collectors:
+              - type: directory
+                regex: /src/\w+/Infrastructure/.*
+
+        - name: Vendor
+          collectors:
+              - type: className
+                regex: ^(Symfony\\Component|Psr\\Log|Doctrine|EasyCorp\\Bundle\\EasyAdminBundle)\\.*
+
+    ruleset:
+        Domain:
+        Application:
+            - Domain
+        Infrastructure:
+            - Domain
+            - Application
+            - Vendor
+        Presentation:
+            - Application
+            - Vendor

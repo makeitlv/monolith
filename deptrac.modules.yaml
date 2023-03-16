@@ -1,0 +1,14 @@
+deptrac:
+    paths:
+        - ./src
+
+    exclude_files:
+        - /src/\w+/Infrastructure/Adapter/.*
+
+    layers:
+        - name: Module
+          collectors:
+              - type: directory
+                regex: /src/\w+/.*
+
+    ruleset: ~

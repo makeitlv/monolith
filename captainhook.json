@@ -24,7 +24,11 @@
         "options": []
       },
       {
-        "action": "./bin/deptrac.phar analyse",
+        "action": "./bin/deptrac.phar analyse --report-uncovered --fail-on-uncovered --no-progress --config-file=deptrac.layers.yaml",
+        "options": []
+      },
+      {
+        "action": "./bin/deptrac.phar analyse --report-uncovered --fail-on-uncovered --no-progress --config-file=deptrac.modules.yaml",
         "options": []
       }
     ]
