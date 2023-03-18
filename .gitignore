@@ -1,3 +1,4 @@
+node_modules
 .phpcs-cache
 .deptrac.cache
 /bin/*.phar
