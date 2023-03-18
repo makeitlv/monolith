@@ -4,6 +4,7 @@ deptrac:
 
     exclude_files:
         - /src/\w+/Infrastructure/Adapter/.*
+        - /vendor/*/.*
 
     layers:
         - name: Module
@@ -11,4 +12,11 @@ deptrac:
               - type: directory
                 regex: /src/\w+/.*
 
-    ruleset: ~
+        - name: Vendor
+          collectors:
+              - type: className
+                regex: ^(Symfony\\Component|Psr\\Log|Doctrine|EasyCorp\\Bundle\\EasyAdminBundle)\\.*
+
+    ruleset:
+        Module:
+            - Vendor

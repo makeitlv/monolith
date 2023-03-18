@@ -21,7 +21,7 @@ deptrac:
         - name: Presentation
           collectors:
               - type: directory
-                regex: /src/\w+/Infrastructure/.*
+                regex: /src/\w+/Presentation/.*
 
         - name: Vendor
           collectors:
