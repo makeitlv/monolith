@@ -7,28 +7,23 @@ namespace App\Admin\Application\UseCase\Command\CreateSuper;
 use App\Admin\Domain\Admin;
 use App\Admin\Domain\ValueObject\Role;
 use App\Admin\Domain\ValueObject\Status;
-use App\Admin\Domain\Repository\AdminRepository;
-use App\Admin\Domain\Service\PasswordEncoder;
+use App\Admin\Domain\Repository\AdminRepositoryInterface;
+use App\Admin\Domain\Service\PasswordEncoderInterface;
 use App\Common\Domain\Bus\Command\CommandHandler;
 use DomainException;
 
 readonly final class CreateSuperAdminHandler implements CommandHandler
 {
     public function __construct(
-        private AdminRepository $adminRepository,
-        private PasswordEncoder $passwordEncoder
+        private AdminRepositoryInterface $adminRepository,
+        private PasswordEncoderInterface $passwordEncoder
     ) {
     }
 
     public function __invoke(CreateSuperAdminCommand $command): void
     {
         if ($this->adminRepository->findByEmail($command->email)) {
-            throw new DomainException(
-                sprintf(
-                    "Admin already exists with such email %s.",
-                    $command->email
-                )
-            );
+            throw new DomainException(sprintf("Admin already exists with such email %s.", $command->email));
         }
 
         $admin = new Admin(

@@ -6,7 +6,7 @@ namespace App\Admin\Domain\Repository;
 
 use App\Admin\Domain\Admin;
 
-interface AdminRepository
+interface AdminRepositoryInterface
 {
     public function persist(Admin $admin): void;
     public function remove(Admin $admin): void;

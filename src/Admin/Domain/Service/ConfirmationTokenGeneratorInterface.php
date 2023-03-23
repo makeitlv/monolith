@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\Domain\Service;
 
-interface PasswordGenerator
+interface ConfirmationTokenGeneratorInterface
 {
     public function generate(): string;
 }
