@@ -23,6 +23,10 @@ readonly final class DeleteAdminHandler implements CommandHandler
             throw new DomainException(sprintf("Admin not found! Uuid: %s.", $command->uuid));
         }
 
+        if (!$admin->canBeDeleted()) {
+            throw new DomainException("Cannot delete admin. Admin is not blocked!");
+        }
+
         $this->adminRepository->remove($admin);
     }
 }

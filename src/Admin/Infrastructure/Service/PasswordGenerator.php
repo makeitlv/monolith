@@ -11,10 +11,6 @@ final class PasswordGenerator implements PasswordGeneratorInterface
     private const BYTES_LENGTH = 32;
     private const PASSWORD_LENGTH = 8;
 
-    public function __construct(private PasswordEncoder $passwordEncoder)
-    {
-    }
-
     public function generate(): string
     {
         return substr(

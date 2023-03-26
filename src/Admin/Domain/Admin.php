@@ -16,7 +16,7 @@ final class Admin
         private string $email,
         private string $firstname,
         private string $lastname,
-        private string $hashedPassword,
+        private string $password,
         private Role $role,
         private Status $status,
         private DateTimeImmutable $createdAt = new DateTimeImmutable(),
@@ -25,11 +25,8 @@ final class Admin
     ) {
     }
 
-    public function update(
-        string $email,
-        string $firstname,
-        string $lastname
-    ): void {
+    public function update(string $email, string $firstname, string $lastname): void
+    {
         $this->email = $email;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
@@ -39,7 +36,7 @@ final class Admin
 
     public function updatePassword(string $password): void
     {
-        $this->hashedPassword = $password;
+        $this->password = $password;
         $this->updatedAt = new DateTimeImmutable();
     }
 
@@ -70,12 +67,14 @@ final class Admin
             throw new DomainException("Admin is not blocked.");
         }
 
-        $this->status =
-            $this->confirmationToken === null
-                ? Status::ACTIVATED
-                : Status::BLOCKED;
+        $this->status = $this->confirmationToken === null ? Status::ACTIVATED : Status::BLOCKED;
 
         $this->updatedAt = new DateTimeImmutable();
+    }
+
+    public function canBeDeleted(): bool
+    {
+        return $this->status === Status::BLOCKED;
     }
 
     public function equals(Admin $admin): bool
