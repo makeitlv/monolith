@@ -11,6 +11,7 @@ use App\Admin\Application\UseCase\Command\Create\CreateAdminCommand;
 use App\Admin\Application\UseCase\Command\Delete\DeleteAdminCommand;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
+use DomainException;
 
 final class DeleteAdminHandlerTest extends KernelTestCase
 {

@@ -10,6 +10,7 @@ use App\Admin\Application\UseCase\Command\Create\CreateAdminCommand;
 use App\Admin\Application\UseCase\Command\Update\UpdateAdminCommand;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
+use DomainException;
 
 final class UpdateAdminHandlerTest extends KernelTestCase
 {

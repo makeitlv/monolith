@@ -11,6 +11,7 @@ use App\Admin\Domain\ValueObject\Role;
 use App\Admin\Domain\ValueObject\Status;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
+use DomainException;
 
 final class CreateAdminHandlerTest extends KernelTestCase
 {

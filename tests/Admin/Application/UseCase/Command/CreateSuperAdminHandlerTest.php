@@ -11,6 +11,7 @@ use App\Admin\Domain\ValueObject\Role;
 use App\Admin\Domain\ValueObject\Status;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
+use DomainException;
 
 final class CreateSuperAdminHandlerTest extends KernelTestCase
 {
@@ -73,6 +74,6 @@ final class CreateSuperAdminHandlerTest extends KernelTestCase
         self::assertEquals(Status::ACTIVATED, $status);
         self::assertNotNull($createdAt);
         self::assertNull($updatedAt);
-        self::assertNotNull($confirmationToken);
+        self::assertNull($confirmationToken);
     }
 }

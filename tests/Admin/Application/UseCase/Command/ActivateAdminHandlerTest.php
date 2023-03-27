@@ -12,6 +12,7 @@ use App\Common\Domain\Bus\Command\CommandBus;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use DomainException;
 
 final class ActivateAdminHandlerTest extends KernelTestCase
 {

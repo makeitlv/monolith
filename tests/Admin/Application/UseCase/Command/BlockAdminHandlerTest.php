@@ -11,6 +11,7 @@ use App\Admin\Application\UseCase\Command\Create\CreateAdminCommand;
 use App\Admin\Domain\ValueObject\Status;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
+use DomainException;
 
 final class BlockAdminHandlerTest extends KernelTestCase
 {
