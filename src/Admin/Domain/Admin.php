@@ -46,6 +46,10 @@ final class Admin
             throw new DomainException("Admin is already activated.");
         }
 
+        if ($this->status === Status::BLOCKED) {
+            throw new DomainException("Admin is blocked.");
+        }
+
         $this->status = Status::ACTIVATED;
         $this->confirmationToken = null;
         $this->updatedAt = new DateTimeImmutable();
@@ -67,7 +71,7 @@ final class Admin
             throw new DomainException("Admin is not blocked.");
         }
 
-        $this->status = $this->confirmationToken === null ? Status::ACTIVATED : Status::BLOCKED;
+        $this->status = $this->confirmationToken === null ? Status::ACTIVATED : Status::DISABLED;
 
         $this->updatedAt = new DateTimeImmutable();
     }
