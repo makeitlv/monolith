@@ -6,9 +6,7 @@ namespace App\Tests\Admin\Infrastructure\Service;
 
 use App\Admin\Infrastructure\Service\PasswordEncoder;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 final class PasswordEncoderTest extends KernelTestCase
 {
