@@ -36,4 +36,14 @@ final class ActivateAdminTest extends TestCase
 
         $admin->activate();
     }
+
+    public function testAdminBlocked(): void
+    {
+        $admin = new Admin("uuid", "test@test.com", "test", "test", "password", Role::ROLE_ADMIN, Status::BLOCKED);
+
+        self::expectException(DomainException::class);
+        self::expectExceptionMessage("Admin is blocked.");
+
+        $admin->activate();
+    }
 }

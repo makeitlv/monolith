@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Admin\Application\UseCase\Command;
 
 use App\Admin\Application\UseCase\Command\Activate\ActivateAdminCommand;
+use App\Admin\Application\UseCase\Command\Block\BlockAdminCommand;
 use App\Admin\Application\UseCase\Command\Create\CreateAdminCommand;
 use App\Admin\Domain\Admin;
 use App\Admin\Domain\ValueObject\Status;
@@ -66,6 +67,28 @@ final class ActivateAdminHandlerTest extends KernelTestCase
 
         self::expectException(DomainException::class);
         self::expectExceptionMessage("Admin is already activated.");
+
+        $commandBus->dispatch(new ActivateAdminCommand($uuid));
+    }
+
+    public function testAdminBlocked(): void
+    {
+        /** @var CommandBus $commandBus */
+        $commandBus = self::getContainer()->get(CommandBus::class);
+
+        $commandBus->dispatch(
+            new CreateAdminCommand(
+                ($uuid = "de28e1d2-9a57-48b0-af1b-ae54b39e0801"),
+                "admin@admin.com",
+                "Admin",
+                "Admin"
+            )
+        );
+
+        $commandBus->dispatch(new BlockAdminCommand($uuid));
+
+        self::expectException(DomainException::class);
+        self::expectExceptionMessage("Admin is blocked.");
 
         $commandBus->dispatch(new ActivateAdminCommand($uuid));
     }
