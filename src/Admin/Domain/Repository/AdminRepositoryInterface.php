@@ -10,6 +10,7 @@ interface AdminRepositoryInterface
 {
     public function persist(Admin $admin): void;
     public function remove(Admin $admin): void;
+    public function flush(): void;
     public function findByUuid(string $uuid): ?Admin;
     public function findByEmail(string $email): ?Admin;
 }

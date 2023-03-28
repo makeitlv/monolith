@@ -16,3 +16,9 @@ services:
         class: 'App\Common\Infrastructure\Bus\Event\AsyncEventBus'
         arguments:
             $eventBus: "@event.bus"
+
+    App\Admin\Domain\Repository\AdminRepositoryInterface:
+        public: true
+        class: 'App\Admin\Infrastructure\Repository\DoctrineAdminRepository'
+        arguments:
+            $entityManager: '@Doctrine\ORM\EntityManagerInterface'

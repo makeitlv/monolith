@@ -22,6 +22,11 @@ final class DoctrineAdminRepository extends AbstractDoctrineRepository implement
         $this->entityManager->remove($admin);
     }
 
+    public function flush(): void
+    {
+        $this->entityManager->flush();
+    }
+
     public function findByUuid(string $uuid): ?Admin
     {
         $admin = $this->objectRepository->findOneBy(["uuid" => $uuid]);
