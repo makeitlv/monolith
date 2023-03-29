@@ -40,7 +40,7 @@ final class DoctrineAdminRepository extends AbstractDoctrineRepository implement
 
     public function findByEmail(string $email): ?Admin
     {
-        $admin = $this->objectRepository->findOneBy(["email" => (string) $email]);
+        $admin = $this->objectRepository->findOneBy(["email" => $email]);
 
         if (!$admin instanceof Admin) {
             return null;
