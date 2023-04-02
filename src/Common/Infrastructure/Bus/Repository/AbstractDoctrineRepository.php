@@ -19,7 +19,7 @@ abstract class AbstractDoctrineRepository
     public function __construct(protected EntityManagerInterface $entityManager)
     {
         if (static::CLASS_NAME === stdClass::class) {
-            throw new InvalidArgumentException("Constant CLASS_NAME should be set");
+            throw new InvalidArgumentException("Constant CLASS_NAME should be set.");
         }
 
         $this->objectRepository = $this->entityManager->getRepository(static::CLASS_NAME);
