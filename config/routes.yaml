@@ -1,5 +1,7 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+back_directory:
+    resource: "routes/back/"
+    type: directory
+
+front_directory:
+    resource: "routes/front/"
+    type: directory
