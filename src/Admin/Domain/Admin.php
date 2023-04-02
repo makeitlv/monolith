@@ -10,7 +10,7 @@ use App\Common\Domain\Translation\TranslatableMessage;
 use App\Common\Domain\Exception\DomainException;
 use DateTimeImmutable;
 
-final class Admin
+class Admin
 {
     public function __construct(
         private string $uuid,
