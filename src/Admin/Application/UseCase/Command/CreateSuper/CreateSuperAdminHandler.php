@@ -10,7 +10,8 @@ use App\Admin\Domain\ValueObject\Status;
 use App\Admin\Domain\Repository\AdminRepositoryInterface;
 use App\Admin\Domain\Service\PasswordEncoderInterface;
 use App\Common\Domain\Bus\Command\CommandHandler;
-use DomainException;
+use App\Common\Domain\Exception\DomainException;
+use App\Common\Domain\Translation\TranslatableMessage;
 
 readonly final class CreateSuperAdminHandler implements CommandHandler
 {
@@ -23,7 +24,11 @@ readonly final class CreateSuperAdminHandler implements CommandHandler
     public function __invoke(CreateSuperAdminCommand $command): void
     {
         if ($this->adminRepository->findByEmail($command->email)) {
-            throw new DomainException(sprintf("Admin already exists with such email %s.", $command->email));
+            throw new DomainException(
+                new TranslatableMessage("Admin already exists with such email %email%.", [
+                    "%email%" => $command->email,
+                ])
+            );
         }
 
         $admin = new Admin(

@@ -7,7 +7,8 @@ namespace App\Admin\Application\UseCase\Command\Delete;
 use App\Admin\Domain\Admin;
 use App\Admin\Domain\Repository\AdminRepositoryInterface;
 use App\Common\Domain\Bus\Command\CommandHandler;
-use DomainException;
+use App\Common\Domain\Exception\DomainException;
+use App\Common\Domain\Translation\TranslatableMessage;
 
 readonly final class DeleteAdminHandler implements CommandHandler
 {
@@ -20,11 +21,13 @@ readonly final class DeleteAdminHandler implements CommandHandler
         $admin = $this->adminRepository->findByUuid($command->uuid);
 
         if (!$admin instanceof Admin) {
-            throw new DomainException(sprintf("Admin not found! Uuid: %s.", $command->uuid));
+            throw new DomainException(
+                new TranslatableMessage("Admin not found! Uuid: %uuid%.", ["%uuid%" => $command->uuid])
+            );
         }
 
         if (!$admin->canBeDeleted()) {
-            throw new DomainException("Cannot delete admin. Admin is not blocked!");
+            throw new DomainException(new TranslatableMessage("Cannot delete admin. Admin is not blocked!"));
         }
 
         $this->adminRepository->remove($admin);

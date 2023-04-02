@@ -6,8 +6,9 @@ namespace App\Admin\Domain;
 
 use App\Admin\Domain\ValueObject\Role;
 use App\Admin\Domain\ValueObject\Status;
+use App\Common\Domain\Translation\TranslatableMessage;
+use App\Common\Domain\Exception\DomainException;
 use DateTimeImmutable;
-use DomainException;
 
 final class Admin
 {
@@ -43,11 +44,11 @@ final class Admin
     public function activate(): void
     {
         if ($this->status === Status::ACTIVATED) {
-            throw new DomainException("Admin is already activated.");
+            throw new DomainException(new TranslatableMessage("Admin is already activated."));
         }
 
         if ($this->status === Status::BLOCKED) {
-            throw new DomainException("Admin is blocked.");
+            throw new DomainException(new TranslatableMessage("Admin is blocked."));
         }
 
         $this->status = Status::ACTIVATED;
@@ -58,7 +59,7 @@ final class Admin
     public function block(): void
     {
         if ($this->status === Status::BLOCKED) {
-            throw new DomainException("Admin is already blocked.");
+            throw new DomainException(new TranslatableMessage("Admin is already blocked."));
         }
 
         $this->status = Status::BLOCKED;
@@ -68,7 +69,7 @@ final class Admin
     public function unblock(): void
     {
         if ($this->status !== Status::BLOCKED) {
-            throw new DomainException("Admin is not blocked.");
+            throw new DomainException(new TranslatableMessage("Admin is not blocked."));
         }
 
         $this->status = $this->confirmationToken === null ? Status::ACTIVATED : Status::DISABLED;

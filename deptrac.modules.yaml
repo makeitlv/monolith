@@ -15,7 +15,7 @@ deptrac:
         - name: Vendor
           collectors:
               - type: className
-                regex: ^(Symfony\\Component|Psr\\Log|Doctrine|EasyCorp\\Bundle\\EasyAdminBundle)\\.*
+                regex: ^(Symfony|Psr\\Log|Doctrine|EasyCorp\\Bundle\\EasyAdminBundle)\\.*
 
     ruleset:
         Module:

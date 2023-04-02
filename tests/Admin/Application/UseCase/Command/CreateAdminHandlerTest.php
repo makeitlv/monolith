@@ -86,7 +86,7 @@ final class CreateAdminHandlerTest extends KernelTestCase
         );
 
         self::expectException(DomainException::class);
-        self::expectExceptionMessage("Admin already exists with such email admin@admin.com");
+        self::expectExceptionMessage("Admin already exists with such email %email%");
 
         $commandBus->dispatch(
             new CreateAdminCommand("de28e1d2-9a57-48b0-af1b-ae54b39e0802", "admin@admin.com", "Admin", "Admin")

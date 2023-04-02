@@ -12,7 +12,8 @@ use App\Admin\Domain\Service\ConfirmationTokenGeneratorInterface;
 use App\Admin\Domain\Service\PasswordEncoderInterface;
 use App\Admin\Domain\Service\PasswordGeneratorInterface;
 use App\Common\Domain\Bus\Command\CommandHandler;
-use DomainException;
+use App\Common\Domain\Exception\DomainException;
+use App\Common\Domain\Translation\TranslatableMessage;
 
 readonly final class CreateAdminHandler implements CommandHandler
 {
@@ -27,7 +28,11 @@ readonly final class CreateAdminHandler implements CommandHandler
     public function __invoke(CreateAdminCommand $command): void
     {
         if ($this->adminRepository->findByEmail($command->email)) {
-            throw new DomainException(sprintf("Admin already exists with such email %s.", $command->email));
+            throw new DomainException(
+                new TranslatableMessage("Admin already exists with such email %email%.", [
+                    "%email%" => $command->email,
+                ])
+            );
         }
 
         $password = $this->passwordGenerator->generate();

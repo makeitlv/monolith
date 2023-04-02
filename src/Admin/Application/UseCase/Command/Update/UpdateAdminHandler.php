@@ -7,7 +7,8 @@ namespace App\Admin\Application\UseCase\Command\Update;
 use App\Admin\Domain\Admin;
 use App\Admin\Domain\Repository\AdminRepositoryInterface;
 use App\Common\Domain\Bus\Command\CommandHandler;
-use DomainException;
+use App\Common\Domain\Exception\DomainException;
+use App\Common\Domain\Translation\TranslatableMessage;
 
 readonly final class UpdateAdminHandler implements CommandHandler
 {
@@ -20,12 +21,18 @@ readonly final class UpdateAdminHandler implements CommandHandler
         $admin = $this->adminRepository->findByUuid($command->uuid);
 
         if (!$admin instanceof Admin) {
-            throw new DomainException(sprintf("Admin not found! Uuid: %s.", $command->uuid));
+            throw new DomainException(
+                new TranslatableMessage("Admin not found! Uuid: %uuid%.", ["%uuid%" => $command->uuid])
+            );
         }
 
         $existingAdmin = $this->adminRepository->findByEmail($command->email);
         if ($existingAdmin && $admin->equals($existingAdmin) === false) {
-            throw new DomainException(sprintf("Admin already exists with such email %s.", $command->email));
+            throw new DomainException(
+                new TranslatableMessage("Admin already exists with such email %email%.", [
+                    "%email%" => $command->email,
+                ])
+            );
         }
 
         $admin->update($command->email, $command->firstname, $command->lastname);
