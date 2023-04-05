@@ -18,6 +18,20 @@ RUN xcaddy build \
 	--with github.com/dunglas/vulcain \
 	--with github.com/dunglas/vulcain/caddy
 
+# Node image
+FROM node:19-alpine AS app_node
+
+WORKDIR /srv/app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+COPY assets assets/
+COPY webpack.config.js ./
+
+RUN npm run build
+
 # Prod image
 FROM php:8.2-fpm-alpine AS app_php
 
@@ -131,4 +145,5 @@ WORKDIR /srv/app
 
 COPY --from=app_caddy_builder /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php /srv/app/public public/
+COPY --from=app_node --link /srv/app/public/build public/build/
 COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
