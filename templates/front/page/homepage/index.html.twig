@@ -1,7 +1,23 @@
 {% extends 'front/layout/base.html.twig' %}
 
-{% block body %}
-    <h1>
-        Homepage
-    </h1>
+{% block main %}
+    <div class="row gx-5 align-items-center justify-content-center">
+        <div class="col-lg-8 col-xl-7 col-xxl-6">
+            <div class="my-3 text-center text-xl-start">
+                <h1 class="display-5 fw-bolder text-dark mb-2">
+                    Modular monolith on PHP and Symfony
+                </h1>
+                <p class="lead fw-normal text-dark-50 mb-2">
+                    This is how should look modular monolith project using PHP,
+                    Symfony and following best practices: Hexagonal
+                    Architecture, SOLID, DDD, CQRS, KISS
+                </p>
+            </div>
+        </div>
+        <div class="col-xl-5 col-xxl-6 d-xl-block text-center">
+            <img class="img-fluid rounded-3 my-3"
+                src="{{ asset('image/terminal.gif') }}"
+                alt="Terminal" />
+        </div>
+    </div>
 {% endblock %}
