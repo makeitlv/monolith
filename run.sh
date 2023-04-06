@@ -9,6 +9,10 @@ if [ $# -gt 0 ]; then
         shift 1
         docker-compose exec -T php php -d memory_limit=-1 /usr/bin/composer "$@"
         docker-compose exec -T php chown -R $(id -u):$(id -g) .
+    elif [ "$1" == "npm" ]; then
+        shift 1
+        docker-compose exec node npm "$@"
+        docker-compose exec php chown -R $(id -u):$(id -g) .
     elif [ "$1" == "fix" ]; then
         shift 1
         docker-compose exec -T php php -d memory_limit=-1 ./bin/phpcbf.phar
