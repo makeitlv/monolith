@@ -145,5 +145,5 @@ WORKDIR /srv/app
 
 COPY --from=app_caddy_builder /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php /srv/app/public public/
-COPY --from=app_node --link /srv/app/public/build public/build/
+COPY --from=app_node /srv/app/public/build public/build/
 COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
