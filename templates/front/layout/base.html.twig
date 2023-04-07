@@ -29,10 +29,14 @@
                     </h3>
 
                     <nav class="nav nav-masthead d-inline-flex mt-2 mt-md-0 ms-md-auto justify-content-center">
-                        <a class="nav-link fw-bold py-1 px-0 active" href="#">
+                        <a class="nav-link fw-bold py-1 px-0 active"
+                            href="{{ path('front.homepage') }}">
                             Home
                         </a>
-                        <a class="nav-link fw-bold py-1 px-0" href="#">Admin</a>
+                        <a class="nav-link fw-bold py-1 px-0"
+                            href="{{ path('back.dashboard') }}">
+                            Admin
+                        </a>
                     </nav>
                 </div>
             </div>
@@ -40,7 +44,9 @@
 
         <main class="bg-white">
             <div class="container py-3">
-                {% block main %}{% endblock %}
+                {% block main %}
+
+                {% endblock %}
             </div>
         </main>
 
