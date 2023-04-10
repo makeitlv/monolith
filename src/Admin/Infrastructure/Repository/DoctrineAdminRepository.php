@@ -6,7 +6,7 @@ namespace App\Admin\Infrastructure\Repository;
 
 use App\Admin\Domain\Admin;
 use App\Admin\Domain\Repository\AdminRepositoryInterface;
-use App\Common\Infrastructure\Bus\Repository\AbstractDoctrineRepository;
+use App\Common\Infrastructure\Repository\AbstractDoctrineRepository;
 
 final class DoctrineAdminRepository extends AbstractDoctrineRepository implements AdminRepositoryInterface
 {
