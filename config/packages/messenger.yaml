@@ -21,6 +21,8 @@ framework:
             command.bus:
                 middleware:
                     - validation
+                    - doctrine_ping_connection
+                    - doctrine_close_connection
                     - doctrine_transaction
             query.bus: ~
             event.bus:

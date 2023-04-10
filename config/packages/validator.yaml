@@ -6,6 +6,11 @@ framework:
         # For instance, basic validation constraints will be inferred from Doctrine's metadata.
         #auto_mapping:
         #    App\Entity\: []
+        mapping:
+            paths:
+                - "%kernel.project_dir%/src/Admin/Infrastructure/Mapping/Validation/Domain/Admin.validation.xml"
+                - "%kernel.project_dir%/src/Admin/Infrastructure/Mapping/Validation/Command/CreateSuperAdminCommand.validation.xml"
+                - "%kernel.project_dir%/src/Admin/Infrastructure/Mapping/Validation/Command/CreateAdminCommand.validation.xml"
 
 when@test:
     framework:
