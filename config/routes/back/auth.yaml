@@ -1,0 +1,3 @@
+login:
+    resource: ../../../src/Security/Presentation/Controller/Back/
+    type: attribute

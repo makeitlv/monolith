@@ -1,0 +1,58 @@
+{% extends 'back/layout/base.html.twig' %}
+
+{% trans_default_domain constant(
+    'App\\Common\\Presentation\\Translation\\Back\\TranslatableMessage::DOMAIN'
+)
+%}
+
+{% block main %}
+    <main>
+        <div class="container p-5">
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger alert-dismissible"
+                        role="alert">
+                        {{
+                            error.messageKey|trans(
+                                error.messageData,
+                                'security'
+                            )
+                        }}
+                    </div>
+                {% endif %}
+
+                <input type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token('authenticate') }}" />
+
+                <div class="form-floating mb-3">
+                    {% set email = 'Email'|trans %}
+
+                    <input type="email"
+                        name="email"
+                        class="form-control"
+                        id="email"
+                        placeholder="{{ email }}" />
+                    <label for="email">{% trans %}Email{% endtrans %}</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    {% set password = 'Password'|trans %}
+
+                    <input type="password"
+                        name="password"
+                        class="form-control"
+                        id="password"
+                        placeholder="{{ password }}" />
+                    <label for="password">
+                        {% trans %}Password{% endtrans %}
+                    </label>
+                </div>
+
+                <button class="w-100 btn btn-lg btn-primary" type="submit">
+                    {% trans %}Sign in{% endtrans %}
+                </button>
+            </form>
+        </div>
+    </main>
+{% endblock %}
