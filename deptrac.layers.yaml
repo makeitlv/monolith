@@ -45,5 +45,6 @@ deptrac:
         Presentation:
             - Domain
             - Application
+            - Infrastructure
             - Translation
             - Vendor
