@@ -1,22 +1,53 @@
 deptrac:
     paths:
         - ./src
-
     exclude_files:
-        - /src/\w+/Infrastructure/Adapter/.*
-        - /vendor/*/.*
-
+        - '#.*\/src\/.*\/Infrastructure\/Adapter\/.*#'
+        - '#.*\/src\/Dashboard\/Presentation\/Controller\/.*#'
     layers:
-        - name: Module
+        - name: Common
           collectors:
               - type: directory
-                regex: /src/\w+/.*
+                value: src/Common/.*
+
+        - name: Admin
+          collectors:
+              - type: directory
+                value: src/Admin/.*
+
+        - name: Dashboard
+
+          collectors:
+              - type: directory
+                value: src/Dashboard/.*
+
+        - name: Home
+          collectors:
+              - type: directory
+                value: src/Home/.*
+
+        - name: Security
+          collectors:
+              - type: directory
+                value: src/Security/.*
 
         - name: Vendor
           collectors:
               - type: className
-                regex: ^(Symfony|Psr\\Log|Doctrine|EasyCorp\\Bundle\\EasyAdminBundle)\\.*
+                regex: ^(Symfony\\Component|Symfony\\Bundle|Symfony\\Contracts|Psr\\Log|Doctrine|EasyCorp\\Bundle\\EasyAdminBundle)\\.*
 
     ruleset:
-        Module:
+        Admin:
+            - Common
+            - Vendor
+        Common:
+            - Vendor
+        Dashboard:
+            - Common
+            - Vendor
+        Home:
+            - Common
+            - Vendor
+        Security:
+            - Common
             - Vendor
