@@ -42,3 +42,4 @@ docker/php/php
 bin/*.phar
 bin/phpunit
 node_modules
+.psalm

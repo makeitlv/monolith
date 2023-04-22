@@ -4,6 +4,7 @@ node_modules
 /bin/*.phar
 /public/phpmetrics
 .vscode
+.psalm
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

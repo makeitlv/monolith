@@ -2,9 +2,14 @@ deptrac:
     paths:
         - ./src
     exclude_files:
-        - '#.*\/src\/.*\/Infrastructure\/Adapter\/.*#'
-        - '#.*\/src\/Dashboard\/Presentation\/Controller\/.*#'
+        - "#.*Adapter.*#"
+        - "#.*DashboardController.*#"
     layers:
+        - name: Adapter
+          collectors:
+              - type: className
+                value: .*Adapter.*
+
         - name: Common
           collectors:
               - type: directory
@@ -16,7 +21,6 @@ deptrac:
                 value: src/Admin/.*
 
         - name: Dashboard
-
           collectors:
               - type: directory
                 value: src/Dashboard/.*
@@ -49,5 +53,6 @@ deptrac:
             - Common
             - Vendor
         Security:
+            - Adapter
             - Common
             - Vendor
