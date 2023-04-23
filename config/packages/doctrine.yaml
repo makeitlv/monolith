@@ -17,6 +17,13 @@ doctrine:
                 dir: "%kernel.project_dir%/src/Admin/Infrastructure/Mapping/Doctrine"
                 prefix: 'App\Admin\Domain'
                 alias: Admin
+            AdminModel:
+                is_bundle: false
+                dir: "%kernel.project_dir%/src/Admin/Presentation/Model"
+                prefix: 'App\Admin\Presentation\Model'
+                alias: AdminModel
+        schema_ignore_classes:
+            - App\Admin\Presentation\Model\AdminModel
 
 when@test:
     doctrine:
