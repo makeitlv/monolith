@@ -13,7 +13,7 @@ class AdminCrud
     {
         return $crud
             ->setPageTitle(Crud::PAGE_DETAIL, static function (AdminModel $admin) {
-                return $admin->email;
+                return sprintf("Display %s", $admin->email);
             })
             ->setPageTitle(Crud::PAGE_EDIT, static function (AdminModel $admin) {
                 return sprintf("Edit %s", $admin->email);
