@@ -34,8 +34,8 @@ class AdminField
             ])
             ->renderAsBadges([
                 "activated" => "success",
-                "blocked" => "warning",
-                "disabled" => "danger",
+                "blocked" => "danger",
+                "disabled" => "warning",
             ])
             ->hideOnForm()
             ->setSortable(false);

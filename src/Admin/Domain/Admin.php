@@ -62,6 +62,10 @@ class Admin
             throw new DomainException(new TranslatableMessage("Admin is already blocked."));
         }
 
+        if ($this->role->value === Role::ROLE_SUPER_ADMIN->value) {
+            throw new DomainException(new TranslatableMessage("It is not possible to block the superadmin."));
+        }
+
         $this->status = Status::BLOCKED;
         $this->updatedAt = new DateTimeImmutable();
     }

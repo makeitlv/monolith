@@ -8,6 +8,7 @@ use App\Admin\Domain\Admin;
 use App\Common\Domain\Bus\Command\CommandBus;
 use App\Admin\Application\UseCase\Command\Block\BlockAdminCommand;
 use App\Admin\Application\UseCase\Command\Create\CreateAdminCommand;
+use App\Admin\Application\UseCase\Command\CreateSuper\CreateSuperAdminCommand;
 use App\Admin\Domain\ValueObject\Status;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
@@ -65,6 +66,27 @@ final class BlockAdminHandlerTest extends KernelTestCase
 
         self::expectException(DomainException::class);
         self::expectExceptionMessage("Admin is already blocked.");
+
+        $commandBus->dispatch(new BlockAdminCommand($uuid));
+    }
+
+    public function testBlockSuperAdmin(): void
+    {
+        /** @var CommandBus $commandBus */
+        $commandBus = self::getContainer()->get(CommandBus::class);
+
+        $commandBus->dispatch(
+            new CreateSuperAdminCommand(
+                ($uuid = "de28e1d2-9a57-48b0-af1b-ae54b39e0801"),
+                "admin@admin.com",
+                "Admin",
+                "Admin",
+                "Password"
+            )
+        );
+
+        self::expectException(DomainException::class);
+        self::expectExceptionMessage("It is not possible to block the superadmin.");
 
         $commandBus->dispatch(new BlockAdminCommand($uuid));
     }
