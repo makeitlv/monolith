@@ -55,6 +55,13 @@ services:
         published: ${HTTP3_PORT:-443}
         protocol: udp
 
+  rabbitmq:
+    image: rabbitmq:${RABBITMQ_VERSION:-3.11.16}-management
+    container_name: rabbitmq
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_log:/var/log/rabbitmq
+
   # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
   ###> symfony/mercure-bundle ###
   ###< symfony/mercure-bundle ###
@@ -80,6 +87,8 @@ volumes:
   caddy_config:
   ###> symfony/mercure-bundle ###
   ###< symfony/mercure-bundle ###
+  rabbitmq_data:
+  rabbitmq_log:
 
   ###> doctrine/doctrine-bundle ###
   database_data:
