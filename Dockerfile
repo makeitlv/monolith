@@ -57,6 +57,7 @@ RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
+		rabbitmq-c-dev \
 	;
 
 RUN set -eux; \
@@ -65,6 +66,7 @@ RUN set -eux; \
     	zip \
     	apcu \
 		opcache \
+		amqp \
     ;
 
 ###> recipes ###
