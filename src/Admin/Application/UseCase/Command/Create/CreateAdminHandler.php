@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\Application\UseCase\Command\Create;
 
 use App\Admin\Domain\Admin;
+use App\Admin\Domain\Event\AdminCreatedEvent;
 use App\Admin\Domain\ValueObject\Role;
 use App\Admin\Domain\ValueObject\Status;
 use App\Admin\Domain\Repository\AdminRepositoryInterface;
@@ -12,6 +13,7 @@ use App\Admin\Domain\Service\ConfirmationTokenGeneratorInterface;
 use App\Admin\Domain\Service\PasswordEncoderInterface;
 use App\Admin\Domain\Service\PasswordGeneratorInterface;
 use App\Common\Domain\Bus\Command\CommandHandler;
+use App\Common\Domain\Bus\Event\EventBus;
 use App\Common\Domain\Exception\DomainException;
 use App\Common\Domain\Translation\TranslatableMessage;
 
@@ -21,7 +23,8 @@ readonly final class CreateAdminHandler implements CommandHandler
         private AdminRepositoryInterface $adminRepository,
         private PasswordGeneratorInterface $passwordGenerator,
         private PasswordEncoderInterface $passwordEncoder,
-        private ConfirmationTokenGeneratorInterface $confirmationTokenGenerator
+        private ConfirmationTokenGeneratorInterface $confirmationTokenGenerator,
+        private EventBus $eventBus
     ) {
     }
 
@@ -36,6 +39,7 @@ readonly final class CreateAdminHandler implements CommandHandler
         }
 
         $password = $this->passwordGenerator->generate();
+        $confirmationToken = $this->confirmationTokenGenerator->generate();
 
         $admin = new Admin(
             $command->uuid,
@@ -45,9 +49,19 @@ readonly final class CreateAdminHandler implements CommandHandler
             $this->passwordEncoder->encode($password),
             Role::ROLE_ADMIN,
             Status::DISABLED,
-            confirmationToken: $this->confirmationTokenGenerator->generate()
+            confirmationToken: $confirmationToken
         );
 
         $this->adminRepository->persist($admin);
+
+        $this->eventBus->publish(
+            new AdminCreatedEvent(
+                $command->uuid,
+                $command->email,
+                $command->firstname . " " . $command->lastname,
+                $password,
+                $confirmationToken
+            )
+        );
     }
 }

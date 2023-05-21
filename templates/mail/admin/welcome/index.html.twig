@@ -1,0 +1,44 @@
+{% extends 'mail/layout/base.html.twig' %}
+
+{% trans_default_domain constant(
+    'App\\Common\\Presentation\\Translation\\Notice\\TranslatableMessage::DOMAIN'
+)
+%}
+
+{% block title %}
+    {{ subject }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-2">
+        {{ subject }}
+    </h1>
+    <h5 class="text-teal-700">
+        {{ name }}
+    </h5>
+    <hr />
+    <div class="space-y-3">
+        <p class="text-gray-700">
+            {% trans %}A new admin account has been created for you. Your
+            credentials:{% endtrans %}
+        </p>
+
+        <ul class="text-gray-700">
+            <li>{% trans %}Username:{% endtrans %} <b>{{ user }}</b></li>
+            <li>{% trans %}Password:{% endtrans %} <b>{{ password }}</b></li>
+        </ul>
+
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <strong>{% trans %}Important!{% endtrans %}</strong>
+            <span>
+                {% trans %}Change your password after logging in.{% endtrans %}
+            </span>
+        </div>
+    </div>
+
+    <hr />
+
+    <a class="btn btn-primary" href="#/{{ confirmationToken }}" target="_blank">
+        {% trans %}Activate{% endtrans %}
+    </a>
+{% endblock %}

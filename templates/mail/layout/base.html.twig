@@ -1,0 +1,29 @@
+{% trans_default_domain constant(
+    'App\\Common\\Presentation\\Translation\\Notice\\TranslatableMessage::DOMAIN'
+)
+%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>
+            {% block title %}
+                {# empty #}
+            {% endblock %}
+        </title>
+    </head>
+    <body class="bg-light">
+        <div class="container">
+            <div class="card mt-5">
+                <div class="card-body">
+                    {% block content %}
+                        {# empty #}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

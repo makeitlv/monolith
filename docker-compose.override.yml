@@ -26,6 +26,7 @@ services:
     volumes:
       - ./:/srv/app
       - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
+    entrypoint: php bin/console messenger:consume async -vv
 
   caddy:
     container_name: caddy
@@ -75,5 +76,7 @@ services:
   mailer:
     container_name: mailer
     image: schickling/mailcatcher
-    ports: ["1025", "1080"]
+    ports:
+      - "127.0.0.1:1025:1025" # dsn server
+      - "127.0.0.1:1080:1080" # web ui
 ###< symfony/mailer ###
