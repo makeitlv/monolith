@@ -19,6 +19,14 @@ services:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
 
+  worker:
+    container_name: worker
+    build:
+      target: app_php_dev
+    volumes:
+      - ./:/srv/app
+      - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
+
   caddy:
     container_name: caddy
     command:
