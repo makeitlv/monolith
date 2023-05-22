@@ -3,6 +3,12 @@
 )
 %}
 
+{% apply inline_css(
+    source('mail/style/bootstrap.min.css'),
+    source('mail/style/mail.css')
+)
+%}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,7 +23,7 @@
     </head>
     <body class="bg-light">
         <div class="container">
-            <div class="card mt-5">
+            <div class="card mt-5 mb-5">
                 <div class="card-body">
                     {% block content %}
                         {# empty #}
@@ -27,3 +33,4 @@
         </div>
     </body>
 </html>
+{% endapply %}
