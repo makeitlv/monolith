@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Connection;
 use Zenstruck\Mailer\Test\InteractsWithMailer;
 use Zenstruck\Messenger\Test\InteractsWithMessenger;
-use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 final class SendWelcomeNotifierHandlerTest extends FunctionalTestCase
 {
@@ -83,10 +83,12 @@ final class SendWelcomeNotifierHandlerTest extends FunctionalTestCase
             ->executeQuery()
             ->fetchAssociative();
 
+        $headers = json_decode($messageData["headers"], true);
+
         /** @var SerializerInterface $serializer */
         $serializer = $this->getContainer()->get(SerializerInterface::class);
         /** @var AdminCreatedEvent $message */
-        $message = $serializer->decode($messageData)->getMessage();
+        $message = $serializer->deserialize($messageData["body"], $headers["type"], "json");
 
         self::assertEquals($uuid, $message->uuid);
         self::assertEquals($email, $message->email);

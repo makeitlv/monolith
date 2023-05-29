@@ -2,6 +2,12 @@ framework:
     messenger:
         failure_transport: failed
 
+        serializer:
+            default_serializer: messenger.transport.symfony_serializer
+            symfony_serializer:
+                format: json
+                context: { enable_annotations: false }
+
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
             async:

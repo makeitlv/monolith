@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Notification\Application\UseCase\Event\Admin\AdminCreated;
 
-use App\Admin\Domain\Event\AdminCreatedEvent;
+use App\Admin\Domain\Event\AdminCreatedEvent as Event;
 use App\Common\Domain\Bus\Event\EventHandler;
 use App\Notification\Application\Service\Admin\WelcomeNotifierInterface;
-use App\Notification\Domain\Event\Admin\AdminCreatedEvent as AdminAdminCreatedEvent;
+use App\Notification\Domain\Event\Admin\AdminCreatedEvent;
 
 readonly final class SendWelcomeNotifierHandler implements EventHandler
 {
@@ -15,10 +15,10 @@ readonly final class SendWelcomeNotifierHandler implements EventHandler
     {
     }
 
-    public function __invoke(AdminCreatedEvent $event)
+    public function __invoke(Event $event)
     {
         $this->notifier->notify(
-            new AdminAdminCreatedEvent(
+            new AdminCreatedEvent(
                 $event->uuid,
                 $event->email,
                 $event->name,
