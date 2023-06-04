@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Admin\Domain\Event;
+namespace App\Admin\Domain\Event\Internal;
 
 use App\Common\Domain\Bus\Event\Event;
 

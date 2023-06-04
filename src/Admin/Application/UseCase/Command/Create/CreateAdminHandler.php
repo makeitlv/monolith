@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\Application\UseCase\Command\Create;
 
 use App\Admin\Domain\Admin;
-use App\Admin\Domain\Event\AdminCreatedEvent;
+use App\Admin\Domain\Event\Internal\AdminCreatedEvent;
 use App\Admin\Domain\ValueObject\Role;
 use App\Admin\Domain\ValueObject\Status;
 use App\Admin\Domain\Repository\AdminRepositoryInterface;
