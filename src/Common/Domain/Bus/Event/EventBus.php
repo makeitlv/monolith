@@ -6,5 +6,5 @@ namespace App\Common\Domain\Bus\Event;
 
 interface EventBus
 {
-    public function publish(object $event): void;
+    public function publish(Event $event): void;
 }

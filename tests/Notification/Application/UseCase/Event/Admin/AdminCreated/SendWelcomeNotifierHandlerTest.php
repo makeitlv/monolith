@@ -63,7 +63,7 @@ final class SendWelcomeNotifierHandlerTest extends FunctionalTestCase
         $asyncTrasport = $this->transport("async");
 
         $asyncTrasport->queue()->assertNotEmpty();
-        $asyncTrasport->queue()->assertCount(2);
+        $asyncTrasport->queue()->assertCount(3);
         $asyncTrasport->queue()->assertContains(ExternalEvent::class);
 
         $asyncTrasport->process();

@@ -39,7 +39,6 @@ framework:
                     allow_no_senders: true
                 middleware:
                     - validation
-                    - App\Common\Infrastructure\Bus\Middleware\EventMiddleware
 
         routing:
             App\Common\Domain\Bus\Command\Command: sync

@@ -12,6 +12,7 @@ services:
             $messageBus: "@query.bus"
 
     App\Common\Domain\Bus\Event\EventBus:
+        autowire: true
         public: true
         class: 'App\Common\Infrastructure\Bus\Event\AsyncEventBus'
         arguments:
