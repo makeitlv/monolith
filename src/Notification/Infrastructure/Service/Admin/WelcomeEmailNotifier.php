@@ -6,7 +6,7 @@ namespace App\Notification\Infrastructure\Service\Admin;
 
 use App\Notification\Application\Service\Admin\WelcomeNotifierInterface;
 use App\Notification\Domain\Event\External\Admin\AdminCreatedEvent;
-use App\Common\Presentation\Translation\Notice\TranslatableMessage;
+use App\Common\Infrastructure\Translation\Notice\TranslatableMessage;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 

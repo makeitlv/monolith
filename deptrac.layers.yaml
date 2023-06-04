@@ -26,7 +26,7 @@ deptrac:
         - name: Vendor
           collectors:
               - type: className
-                regex: ^(Symfony\\Component|Symfony\\Bundle|Psr\\Log|Doctrine|EasyCorp\\Bundle\\EasyAdminBundle)\\.*
+                regex: ^(Symfony\\Component|Symfony\\Bundle|Symfony\\Bridge|Psr\\Log|Doctrine|EasyCorp\\Bundle\\EasyAdminBundle)\\.*
 
         - name: Translation
           collectors:
@@ -41,6 +41,7 @@ deptrac:
         Infrastructure:
             - Domain
             - Application
+            - Translation
             - Vendor
         Presentation:
             - Domain

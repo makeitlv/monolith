@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Common\Presentation\Translation\Notice;
+namespace App\Common\Infrastructure\Translation\Notice;
 
 use App\Common\Domain\Translation\TranslatableMessage as TranslationTranslatableMessage;
 
