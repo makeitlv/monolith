@@ -31,4 +31,9 @@ final class AdminAdapter
             $admin->status
         );
     }
+
+    public function activateAdmin(string $confirmationToken): void
+    {
+        $this->api->activateAdmin($confirmationToken);
+    }
 }

@@ -1,0 +1,36 @@
+{% extends 'back/layout/base.html.twig' %}
+
+{% trans_default_domain constant(
+    'App\\Common\\Presentation\\Translation\\Back\\TranslatableMessage::DOMAIN'
+)
+%}
+
+{% block main %}
+    <main>
+        <div class="container p-5">
+            {% if confirmed %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    {% trans from 'security' %}Your profile successfully
+                    activated!{% endtrans %}
+                </div>
+            {% else %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {% trans from 'security' %}Confirmation token is invalid!{% endtrans
+                    %}
+                </div>
+            {% endif %}
+
+            <div class="d-flex flex-column flex-md-row align-items-center">
+                <a href="{{ path('back.login') }}"
+                    class="w-100 btn btn-lg btn-primary me-0 me-md-2 mb-3 mb-md-0">
+                    {% trans %}Login Page{% endtrans %}
+                </a>
+
+                <a href="{{ path('front.homepage') }}"
+                    class="w-100 btn btn-lg btn-secondary ms-0 ms-md-2">
+                    {% trans %}Home Page{% endtrans %}
+                </a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -28,7 +28,8 @@ final class SendWelcomeNotifierHandlerTest extends FunctionalTestCase
                 ($uuid = "de28e1d2-9a57-48b0-af1b-ae54b39e0801"),
                 ($email = "admin@admin.com"),
                 ($name = "Admin Admin"),
-                ($password = "Password")
+                ($password = "Password"),
+                "confirmationToken"
             )
         );
 
@@ -56,7 +57,8 @@ final class SendWelcomeNotifierHandlerTest extends FunctionalTestCase
                 ($uuid = "de28e1d2-9a57-48b0-af1b-ae54b39e0801"),
                 ($email = "adminadmin.com"),
                 ($name = "Admin Admin"),
-                ($password = "Password")
+                ($password = "Password"),
+                "confirmationToken"
             )
         );
 
@@ -95,6 +97,6 @@ final class SendWelcomeNotifierHandlerTest extends FunctionalTestCase
         self::assertEquals($email, $message->email);
         self::assertEquals($name, $message->name);
         self::assertEquals($password, $message->plainPassword);
-        self::assertNull($message->confirmationToken);
+        self::assertNotNull($message->confirmationToken);
     }
 }

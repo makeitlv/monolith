@@ -38,7 +38,18 @@
 
     <hr />
 
-    <a class="btn btn-primary" href="#/{{ confirmationToken }}" target="_blank">
+    <a class="btn btn-primary"
+        href="{{
+        absolute_url(
+            path(
+                'back.confirm',
+                {
+                    token: confirmationToken
+                }
+            )
+        )
+        }}"
+        target="_blank">
         {% trans %}Activate{% endtrans %}
     </a>
 {% endblock %}

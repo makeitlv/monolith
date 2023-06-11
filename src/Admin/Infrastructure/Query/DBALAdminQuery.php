@@ -39,4 +39,30 @@ final class DBALAdminQuery implements AdminQueryInterface
             (string) $row["status"]
         );
     }
+
+    public function findByConfirmationToken(string $confirmationToken): ?AdminDTO
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+
+        $queryBuilder
+            ->select("*")
+            ->from("admin")
+            ->where("confirmation_token = :confirmationToken")
+            ->setParameter("confirmationToken", $confirmationToken);
+
+        $row = $queryBuilder->executeQuery()->fetchAssociative();
+        if ($row === false) {
+            return null;
+        }
+
+        return new AdminDTO(
+            (string) $row["uuid"],
+            (string) $row["email"],
+            (string) $row["firstname"],
+            (string) $row["lastname"],
+            (string) $row["password"],
+            (string) $row["role"],
+            (string) $row["status"]
+        );
+    }
 }
