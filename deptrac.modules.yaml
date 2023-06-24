@@ -4,6 +4,7 @@ deptrac:
     exclude_files:
         - "#.*Adapter.*#"
         - "#.*DashboardMenuItem.*#"
+        - "#.*Controller.*#"
     layers:
         - name: Adapter
           collectors:
@@ -24,6 +25,11 @@ deptrac:
           collectors:
               - type: className
                 value: .*DashboardMenuItem.*
+
+        - name: DashboardController
+          collectors:
+              - type: directory
+                value: src/*/Presentation/Controller/Back/.*
 
         - name: Dashboard
           collectors:
@@ -47,12 +53,15 @@ deptrac:
 
     ruleset:
         Admin:
+            - Adapter
             - Common
             - Vendor
         Common:
             - Vendor
         Dashboard:
+            - Adapter
             - DashboardMenu
+            - DashboardController
             - Common
             - Vendor
         Home:

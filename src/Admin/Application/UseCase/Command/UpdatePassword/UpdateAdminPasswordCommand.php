@@ -8,7 +8,7 @@ use App\Common\Domain\Bus\Command\Command;
 
 readonly final class UpdateAdminPasswordCommand implements Command
 {
-    public function __construct(public string $uuid)
+    public function __construct(public string $uuid, public string $password)
     {
     }
 }

@@ -1,0 +1,32 @@
+{% extends 'mail/layout/base.html.twig' %}
+
+{% trans_default_domain constant(
+    'App\\Common\\Infrastructure\\Translation\\Notice\\TranslatableMessage::DOMAIN'
+)
+%}
+
+{% block title %}
+    {{ subject }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-2">
+        {{ subject }}
+    </h1>
+    <h5 class="text-teal-700">
+        {{ name }}
+    </h5>
+    <hr />
+    <div class="space-y-3">
+        <p class="text-gray-700">
+            {% trans %}New password:{% endtrans %} <b>{{ password }}</b>
+        </p>
+
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <strong>{% trans %}Important!{% endtrans %}</strong>
+            <span>
+                {% trans %}Change your password after logging in.{% endtrans %}
+            </span>
+        </div>
+    </div>
+{% endblock %}

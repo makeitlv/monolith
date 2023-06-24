@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Admin\Presentation\Controller;
+namespace App\Admin\Presentation\Controller\Back;
 
 use App\Admin\Application\UseCase\Command\Activate\ActivateAdminCommand;
 use App\Admin\Application\UseCase\Command\Block\BlockAdminCommand;
 use App\Admin\Application\UseCase\Command\Create\CreateAdminCommand;
 use App\Admin\Application\UseCase\Command\Delete\DeleteAdminCommand;
 use App\Admin\Application\UseCase\Command\Update\UpdateAdminCommand;
+use App\Admin\Application\UseCase\Command\GeneratePassword\GenerateAdminPasswordCommand;
 use App\Admin\Application\UseCase\Command\UpdatePassword\UpdateAdminPasswordCommand;
 use App\Admin\Presentation\Model\AdminModel;
+use App\Admin\Infrastructure\Adapter\Security\SecurityAdapter;
 use App\Common\Domain\Bus\Command\CommandBus;
 use App\Common\Presentation\Controller\Back\AbstractController;
 use App\Common\Presentation\Translation\Back\TranslatableMessage;
@@ -28,7 +30,7 @@ use RuntimeException;
  */
 class AdminController extends AbstractController
 {
-    public function __construct(private CommandBus $bus)
+    public function __construct(private SecurityAdapter $securityAdapter, private CommandBus $bus)
     {
     }
 
@@ -39,12 +41,27 @@ class AdminController extends AbstractController
 
     public function configureActions(Actions $actions): Actions
     {
-        return AdminAction::configureActions(parent::configureActions($actions));
+        return AdminAction::configureActions(parent::configureActions($actions), $this->securityAdapter->getAdmin());
     }
 
     public function configureFields(string $pageName): iterable
     {
-        return AdminField::configureFields();
+        /** @var AdminModel $admin */
+        $admin = $this->getContext()
+            ?->getEntity()
+            ?->getInstance();
+
+        $currentAdmin = false;
+        if (
+            $this->getContext()
+                ?->getCrud()
+                ?->getCurrentPage() === Crud::PAGE_EDIT &&
+            $admin->uuid === $this->securityAdapter->getAdmin()->uuid
+        ) {
+            $currentAdmin = true;
+        }
+
+        return AdminField::configureFields($currentAdmin);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -86,6 +103,10 @@ class AdminController extends AbstractController
                 $entityInstance->lastname
             )
         );
+
+        if ($entityInstance->newPassword) {
+            $this->bus->dispatch(new UpdateAdminPasswordCommand($entityInstance->uuid, $entityInstance->newPassword));
+        }
     }
 
     public function deleteAction(EntityManagerInterface $entityManager, mixed $entityInstance): void
@@ -126,7 +147,9 @@ class AdminController extends AbstractController
         return $this->customAction($adminContext, $adminUrlGenerator, function (AdminContext $adminContext) {
             /** @var AdminModel $admin */
             $admin = $adminContext->getEntity()->getInstance();
-            $this->bus->dispatch(new UpdateAdminPasswordCommand($admin->uuid));
+            $this->bus->dispatch(
+                new GenerateAdminPasswordCommand($admin->uuid, $admin->email, $admin->firstname, $admin->lastname)
+            );
 
             $this->addFlash("success", new TranslatableMessage("Admin password reset."));
         });

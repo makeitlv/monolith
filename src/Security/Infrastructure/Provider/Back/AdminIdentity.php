@@ -12,6 +12,8 @@ class AdminIdentity implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct(
         private string $uuid,
         private string $email,
+        private string $firstname,
+        private string $lastname,
         private string $password,
         private string $role,
         private string $status
@@ -43,9 +45,24 @@ class AdminIdentity implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
+    public function getFirstname(): string
+    {
+        return $this->firstname;
+    }
+
+    public function getLastname(): string
+    {
+        return $this->lastname;
+    }
+
     public function getPassword(): ?string
     {
         return $this->password;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
     }
 
     public function getStatus(): string

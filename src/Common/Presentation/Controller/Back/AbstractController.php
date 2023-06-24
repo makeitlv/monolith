@@ -91,6 +91,7 @@ abstract class AbstractController extends AbstractCrudController
         } catch (DomainException $exception) {
             $this->addErrorFlash($exception->getTranslatableMessage());
         } catch (Throwable $exception) {
+            dump($exception);
             $this->addErrorFlash(
                 new BackTranslatableMessage("Something went wrong! Please, contact with administrator to figure out.")
             );

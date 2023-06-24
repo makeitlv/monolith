@@ -39,7 +39,15 @@ class AdminProvider implements UserProviderInterface
             throw new UserNotFoundException();
         }
 
-        $adminIdentity = new AdminIdentity($admin->uuid, $admin->email, $admin->password, $admin->role, $admin->status);
+        $adminIdentity = new AdminIdentity(
+            $admin->uuid,
+            $admin->email,
+            $admin->firstname,
+            $admin->lastname,
+            $admin->password,
+            $admin->role,
+            $admin->status
+        );
 
         if ($adminIdentity->getStatus() !== "activated") {
             throw new UnsupportedUserException();

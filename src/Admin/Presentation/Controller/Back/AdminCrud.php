@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Admin\Presentation\Controller;
+namespace App\Admin\Presentation\Controller\Back;
 
 use App\Admin\Presentation\Model\AdminModel;
 use App\Common\Presentation\Translation\Back\TranslatableMessage;
