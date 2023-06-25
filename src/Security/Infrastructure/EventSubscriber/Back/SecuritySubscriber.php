@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Presentation\EventSubscriber\Back;
+namespace App\Security\Infrastructure\EventSubscriber\Back;
 
 use App\Security\Infrastructure\Provider\Back\AdminIdentity;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
