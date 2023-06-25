@@ -2,23 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\Notification\Infrastructure\Service\Admin;
+namespace App\Notification\Infrastructure\Service\Admin\AdminPasswordChanged;
 
-use App\Notification\Application\Service\Admin\WelcomeNotifierInterface;
-use App\Notification\Domain\Event\External\Admin\AdminCreatedEvent;
+use App\Common\Domain\Bus\Event\Event;
 use App\Common\Infrastructure\Translation\Notice\TranslatableMessage;
+use App\Notification\Application\Service\NotifierInterface;
+use App\Notification\Domain\Event\External\Admin\AdminPasswordChangedEvent;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 
-readonly final class WelcomeEmailNotifier implements WelcomeNotifierInterface
+readonly final class AdminPasswordChangedEmailNotifier implements NotifierInterface
 {
     public function __construct(private MailerInterface $mailer)
     {
     }
 
-    public function notify(AdminCreatedEvent $event): void
+    public function notify(Event $event): void
     {
-        $subject = new TranslatableMessage("Welcome to the team!");
+        /** @var AdminPasswordChangedEvent $event */
+        $subject = new TranslatableMessage("Your password changed!");
 
         $email = (new TemplatedEmail())
             ->to($event->email)
@@ -28,9 +30,8 @@ readonly final class WelcomeEmailNotifier implements WelcomeNotifierInterface
                 "user" => $event->email,
                 "name" => $event->name,
                 "password" => $event->plainPassword,
-                "confirmationToken" => $event->confirmationToken,
             ])
-            ->htmlTemplate("mail/admin/welcome/index.html.twig");
+            ->htmlTemplate("mail/admin/password/index.html.twig");
 
         $this->mailer->send($email);
     }
