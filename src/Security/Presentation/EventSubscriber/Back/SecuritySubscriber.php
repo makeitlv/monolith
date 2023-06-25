@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security\Presentation\EventSubscriber\Back;
 
+use App\Security\Infrastructure\Provider\Back\AdminIdentity;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -31,7 +32,13 @@ final class SecuritySubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($this->security->getUser() && $request->getMethod() === "GET") {
+        if ($request->getMethod() !== "GET") {
+            return;
+        }
+
+        /** @var AdminIdentity|null $admin */
+        $admin = $this->security->getUser();
+        if ($admin instanceof AdminIdentity && $admin->isPasswordSecure() === false) {
             /** @var Session $session */
             $session = $request->getSession();
 

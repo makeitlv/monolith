@@ -39,5 +39,7 @@
         <field name="updatedAt" type="datetime_immutable" nullable="true" />
 
         <field name="confirmationToken" length="32" nullable="true" />
+
+        <field name="passwordSecure" type="boolean" default="false" />
     </entity>
 </doctrine-mapping>

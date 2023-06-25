@@ -16,7 +16,8 @@ class AdminIdentity implements UserInterface, PasswordAuthenticatedUserInterface
         private string $lastname,
         private string $password,
         private string $role,
-        private string $status
+        private string $status,
+        private bool $passwordSecure
     ) {
     }
 
@@ -68,5 +69,10 @@ class AdminIdentity implements UserInterface, PasswordAuthenticatedUserInterface
     public function getStatus(): string
     {
         return $this->status;
+    }
+
+    public function isPasswordSecure(): bool
+    {
+        return $this->passwordSecure;
     }
 }

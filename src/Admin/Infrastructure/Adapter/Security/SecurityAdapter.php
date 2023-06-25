@@ -24,7 +24,8 @@ final class SecurityAdapter
             $admin->lastname,
             $admin->password,
             $admin->role,
-            $admin->status
+            $admin->status,
+            $admin->passwordSecure
         );
     }
 }

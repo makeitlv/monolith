@@ -36,7 +36,8 @@ final class DBALAdminQuery implements AdminQueryInterface
             (string) $row["lastname"],
             (string) $row["password"],
             (string) $row["role"],
-            (string) $row["status"]
+            (string) $row["status"],
+            filter_var($row["password_secure"], FILTER_VALIDATE_BOOLEAN)
         );
     }
 
@@ -62,7 +63,8 @@ final class DBALAdminQuery implements AdminQueryInterface
             (string) $row["lastname"],
             (string) $row["password"],
             (string) $row["role"],
-            (string) $row["status"]
+            (string) $row["status"],
+            filter_var($row["password_secure"], FILTER_VALIDATE_BOOLEAN)
         );
     }
 }

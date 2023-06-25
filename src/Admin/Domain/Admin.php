@@ -22,7 +22,8 @@ class Admin
         private Status $status,
         private DateTimeImmutable $createdAt = new DateTimeImmutable(),
         private ?DateTimeImmutable $updatedAt = null,
-        private ?string $confirmationToken = null
+        private ?string $confirmationToken = null,
+        private bool $passwordSecure = false
     ) {
     }
 
@@ -77,6 +78,20 @@ class Admin
         }
 
         $this->status = $this->confirmationToken === null ? Status::ACTIVATED : Status::DISABLED;
+
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
+    public function corruptPassword(): void
+    {
+        $this->passwordSecure = false;
+
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
+    public function securePassword(): void
+    {
+        $this->passwordSecure = true;
 
         $this->updatedAt = new DateTimeImmutable();
     }

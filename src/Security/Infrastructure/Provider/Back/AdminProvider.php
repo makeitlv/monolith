@@ -46,7 +46,8 @@ class AdminProvider implements UserProviderInterface
             $admin->lastname,
             $admin->password,
             $admin->role,
-            $admin->status
+            $admin->status,
+            $admin->passwordSecure
         );
 
         if ($adminIdentity->getStatus() !== "activated") {

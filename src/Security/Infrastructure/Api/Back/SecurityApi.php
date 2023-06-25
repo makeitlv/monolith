@@ -6,8 +6,8 @@ namespace App\Security\Infrastructure\Api\Back;
 
 use App\Security\Domain\DataTransfer\AdminDTO;
 use App\Security\Infrastructure\Provider\Back\AdminIdentity;
-use RuntimeException;
 use Symfony\Bundle\SecurityBundle\Security;
+use RuntimeException;
 
 final class SecurityApi
 {
@@ -26,7 +26,8 @@ final class SecurityApi
                 $admin->getLastname(),
                 (string) $admin->getPassword(),
                 $admin->getRole(),
-                $admin->getStatus()
+                $admin->getStatus(),
+                $admin->isPasswordSecure()
             );
         }
 

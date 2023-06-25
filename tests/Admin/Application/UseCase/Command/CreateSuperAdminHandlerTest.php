@@ -48,6 +48,7 @@ final class CreateSuperAdminHandlerTest extends KernelTestCase
                 $admin->createdAt,
                 $admin->updatedAt,
                 $admin->confirmationToken,
+                $admin->passwordSecure
             ];
         };
 
@@ -62,6 +63,7 @@ final class CreateSuperAdminHandlerTest extends KernelTestCase
             $createdAt,
             $updatedAt,
             $confirmationToken,
+            $passwordSecure,
         ) = call_user_func($closure->bindTo($admin, $admin::class));
 
         self::assertEquals($uuid, $actualUuid);
@@ -74,5 +76,6 @@ final class CreateSuperAdminHandlerTest extends KernelTestCase
         self::assertNotNull($createdAt);
         self::assertNull($updatedAt);
         self::assertNull($confirmationToken);
+        self::assertTrue($passwordSecure);
     }
 }

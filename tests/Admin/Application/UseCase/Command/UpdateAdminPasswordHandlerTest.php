@@ -42,10 +42,11 @@ final class UpdateAdminPasswordHandlerTest extends KernelTestCase
 
         $admin = $repository->find($uuid);
         $closure = function () use ($admin) {
-            return $admin->password;
+            return [$admin->password, $admin->passwordSecure];
         };
-        $newPassword = call_user_func($closure->bindTo($admin, $admin::class));
+        list($newPassword, $passwordSecure) = call_user_func($closure->bindTo($admin, $admin::class));
 
         self::assertNotEquals($oldPassword, $newPassword);
+        self::assertTrue($passwordSecure);
     }
 }

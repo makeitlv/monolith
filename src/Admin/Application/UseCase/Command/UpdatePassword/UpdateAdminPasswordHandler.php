@@ -32,6 +32,7 @@ readonly final class UpdateAdminPasswordHandler implements CommandHandler
         }
 
         $admin->updatePassword($this->passwordEncoder->encode($command->password));
+        $admin->securePassword();
 
         $this->adminRepository->persist($admin);
     }

@@ -13,7 +13,8 @@ readonly final class AdminDTO
         public string $lastname,
         public string $password,
         public string $role,
-        public string $status
+        public string $status,
+        public bool $passwordSecure
     ) {
     }
 }

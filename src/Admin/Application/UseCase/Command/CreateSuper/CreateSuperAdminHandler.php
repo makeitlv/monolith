@@ -41,7 +41,8 @@ readonly final class CreateSuperAdminHandler implements CommandHandler
             $command->lastname,
             $this->passwordEncoder->encode($command->password),
             Role::ROLE_SUPER_ADMIN,
-            Status::ACTIVATED
+            Status::ACTIVATED,
+            passwordSecure: true
         );
 
         $this->adminRepository->persist($admin);

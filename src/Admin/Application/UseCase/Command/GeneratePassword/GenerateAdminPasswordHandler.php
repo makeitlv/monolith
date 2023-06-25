@@ -36,6 +36,7 @@ readonly final class GenerateAdminPasswordHandler implements CommandHandler
 
         $password = $this->passwordGenerator->generate();
         $admin->updatePassword($this->passwordEncoder->encode($password));
+        $admin->corruptPassword();
 
         $this->adminRepository->persist($admin);
 
