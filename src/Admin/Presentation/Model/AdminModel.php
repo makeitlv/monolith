@@ -44,12 +44,12 @@ class AdminModel
     #[ORM\Column]
     public string $password;
 
-    public string $currentPassword;
+    public ?string $currentPassword = null;
 
     #[Assert\Length(min: 5)]
     #[Assert\PasswordStrength]
     #[Assert\NotCompromisedPassword]
-    public string $newPassword;
+    public ?string $newPassword = null;
 
     #[ORM\Column]
     public string $confirmationToken;
