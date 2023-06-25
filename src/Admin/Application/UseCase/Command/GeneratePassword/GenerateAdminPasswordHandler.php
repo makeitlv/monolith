@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace App\Admin\Application\UseCase\Command\GeneratePassword;
 
 use App\Admin\Domain\Admin;
-use App\Admin\Domain\Event\Internal\AdminPasswordChangedEvent;
 use App\Admin\Domain\Repository\AdminRepositoryInterface;
 use App\Admin\Domain\Service\PasswordGeneratorInterface;
 use App\Admin\Domain\Service\PasswordEncoderInterface;
 use App\Common\Domain\Bus\Command\CommandHandler;
-use App\Common\Domain\Bus\Event\EventBus;
 use App\Common\Domain\Exception\DomainException;
 use App\Common\Domain\Translation\TranslatableMessage;
 
@@ -19,8 +17,7 @@ readonly final class GenerateAdminPasswordHandler implements CommandHandler
     public function __construct(
         private AdminRepositoryInterface $adminRepository,
         private PasswordGeneratorInterface $passwordGenerator,
-        private PasswordEncoderInterface $passwordEncoder,
-        private EventBus $eventBus
+        private PasswordEncoderInterface $passwordEncoder
     ) {
     }
 
@@ -35,18 +32,8 @@ readonly final class GenerateAdminPasswordHandler implements CommandHandler
         }
 
         $password = $this->passwordGenerator->generate();
-        $admin->updatePassword($this->passwordEncoder->encode($password));
-        $admin->corruptPassword();
+        $admin->generatePassword($password, $this->passwordEncoder->encode($password));
 
         $this->adminRepository->persist($admin);
-
-        $this->eventBus->publish(
-            new AdminPasswordChangedEvent(
-                $command->uuid,
-                $command->email,
-                $command->firstname . " " . $command->lastname,
-                $password
-            )
-        );
     }
 }

@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace App\Admin\Application\UseCase\Command\CreateSuper;
 
 use App\Admin\Domain\Admin;
-use App\Admin\Domain\Event\Internal\AdminCreatedEvent;
 use App\Admin\Domain\ValueObject\Role;
 use App\Admin\Domain\ValueObject\Status;
 use App\Admin\Domain\Repository\AdminRepositoryInterface;
 use App\Admin\Domain\Service\PasswordEncoderInterface;
 use App\Common\Domain\Bus\Command\CommandHandler;
-use App\Common\Domain\Bus\Event\EventBus;
 use App\Common\Domain\Exception\DomainException;
 use App\Common\Domain\Translation\TranslatableMessage;
 
@@ -19,8 +17,7 @@ readonly final class CreateSuperAdminHandler implements CommandHandler
 {
     public function __construct(
         private AdminRepositoryInterface $adminRepository,
-        private PasswordEncoderInterface $passwordEncoder,
-        private EventBus $eventBus
+        private PasswordEncoderInterface $passwordEncoder
     ) {
     }
 
@@ -46,14 +43,5 @@ readonly final class CreateSuperAdminHandler implements CommandHandler
         );
 
         $this->adminRepository->persist($admin);
-
-        $this->eventBus->publish(
-            new AdminCreatedEvent(
-                $command->uuid,
-                $command->email,
-                $command->firstname . " " . $command->lastname,
-                $command->password
-            )
-        );
     }
 }

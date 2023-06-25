@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace App\Admin\Domain;
 
+use App\Admin\Domain\Event\Internal\AdminCreatedEvent;
+use App\Admin\Domain\Event\Internal\AdminPasswordChangedEvent;
 use App\Admin\Domain\ValueObject\Role;
 use App\Admin\Domain\ValueObject\Status;
+use App\Common\Domain\Aggregate;
+use App\Common\Domain\AggregateInterface;
 use App\Common\Domain\Translation\TranslatableMessage;
 use App\Common\Domain\Exception\DomainException;
 use DateTimeImmutable;
 
-class Admin
+class Admin extends Aggregate implements AggregateInterface
 {
     public function __construct(
         private string $uuid,
@@ -25,6 +29,7 @@ class Admin
         private ?string $confirmationToken = null,
         private bool $passwordSecure = false
     ) {
+        $this->raise(new AdminCreatedEvent($uuid, $email, $firstname . " " . $lastname, $password, $confirmationToken));
     }
 
     public function update(string $email, string $firstname, string $lastname): void
@@ -38,8 +43,25 @@ class Admin
 
     public function updatePassword(string $password): void
     {
+        $this->passwordSecure = true;
         $this->password = $password;
         $this->updatedAt = new DateTimeImmutable();
+    }
+
+    public function generatePassword(string $plainPassword, string $password): void
+    {
+        $this->passwordSecure = false;
+        $this->password = $password;
+        $this->updatedAt = new DateTimeImmutable();
+
+        $this->raise(
+            new AdminPasswordChangedEvent(
+                $this->uuid,
+                $this->email,
+                $this->firstname . " " . $this->lastname,
+                $plainPassword
+            )
+        );
     }
 
     public function activate(): void
@@ -78,20 +100,6 @@ class Admin
         }
 
         $this->status = $this->confirmationToken === null ? Status::ACTIVATED : Status::DISABLED;
-
-        $this->updatedAt = new DateTimeImmutable();
-    }
-
-    public function corruptPassword(): void
-    {
-        $this->passwordSecure = false;
-
-        $this->updatedAt = new DateTimeImmutable();
-    }
-
-    public function securePassword(): void
-    {
-        $this->passwordSecure = true;
 
         $this->updatedAt = new DateTimeImmutable();
     }
