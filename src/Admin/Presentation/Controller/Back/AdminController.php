@@ -10,6 +10,7 @@ use App\Admin\Application\UseCase\Command\Create\CreateAdminCommand;
 use App\Admin\Application\UseCase\Command\Delete\DeleteAdminCommand;
 use App\Admin\Application\UseCase\Command\Update\UpdateAdminCommand;
 use App\Admin\Application\UseCase\Command\GeneratePassword\GenerateAdminPasswordCommand;
+use App\Admin\Application\UseCase\Command\Unblock\UnblockAdminCommand;
 use App\Admin\Application\UseCase\Command\UpdatePassword\UpdateAdminPasswordCommand;
 use App\Admin\Presentation\Model\AdminModel;
 use App\Admin\Infrastructure\Adapter\Security\SecurityAdapter;
@@ -139,6 +140,17 @@ class AdminController extends AbstractController
             $this->bus->dispatch(new BlockAdminCommand($admin->uuid));
 
             $this->addFlash("success", new TranslatableMessage("Admin blocked."));
+        });
+    }
+
+    public function unblockAction(AdminContext $adminContext, AdminUrlGenerator $adminUrlGenerator): Response
+    {
+        return $this->customAction($adminContext, $adminUrlGenerator, function (AdminContext $adminContext) {
+            /** @var AdminModel $admin */
+            $admin = $adminContext->getEntity()->getInstance();
+            $this->bus->dispatch(new UnblockAdminCommand($admin->uuid));
+
+            $this->addFlash("success", new TranslatableMessage("Admin unblocked."));
         });
     }
 

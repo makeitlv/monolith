@@ -14,6 +14,7 @@ class AdminAction
 {
     private const ACTIVATE = "activateAction";
     private const BLOCK = "blockAction";
+    private const UNBLOCK = "unblockAction";
     private const RESET_PASSWORD = "resetPasswordAction";
 
     public static function configureActions(Actions $action, AdminDTO $admin): Actions
@@ -21,6 +22,7 @@ class AdminAction
         return $action
             ->add(Crud::PAGE_DETAIL, self::createResetPasswordAction($admin))
             ->add(Crud::PAGE_DETAIL, self::createBlockAction())
+            ->add(Crud::PAGE_DETAIL, self::createUnblockAction())
             ->add(Crud::PAGE_DETAIL, self::createActivateAction())
             ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
                 return $action->displayIf(static function (AdminModel $admin): bool {
@@ -44,6 +46,15 @@ class AdminAction
             ->linkToCrudAction(self::BLOCK)
             ->displayIf(static function (AdminModel $admin): bool {
                 return $admin->status !== "blocked" && !\in_array("ROLE_SUPER_ADMIN", $admin->getRole(), true);
+            });
+    }
+
+    private static function createUnblockAction(): Action
+    {
+        return Action::new(self::UNBLOCK, "Unblock", "fa fa-unlock-alt")
+            ->linkToCrudAction(self::UNBLOCK)
+            ->displayIf(static function (AdminModel $admin): bool {
+                return $admin->status === "blocked" && !\in_array("ROLE_SUPER_ADMIN", $admin->getRole(), true);
             });
     }
 
