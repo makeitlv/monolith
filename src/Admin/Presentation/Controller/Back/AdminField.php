@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use App\Common\Presentation\Form\NewPasswordType;
 
 class AdminField
 {
@@ -51,22 +52,10 @@ class AdminField
         if ($currentAdmin) {
             yield FormField::addPanel("Change Password")->onlyWhenUpdating();
 
-            yield Field::new("currentPassword", "Current Password")
+            yield Field::new("password", "")
                 ->onlyWhenUpdating()
                 ->setRequired(false)
-                ->setFormType(PasswordType::class);
-
-            yield Field::new("newPassword", "New password")
-                ->onlyWhenUpdating()
-                ->setRequired(false)
-                ->setFormType(RepeatedType::class)
-                ->setFormTypeOptions([
-                    "type" => PasswordType::class,
-                    "first_options" => ["label" => "New password"],
-                    "second_options" => ["label" => "Repeat password"],
-                    "error_bubbling" => false,
-                    "invalid_message" => "The password fields do not match."
-                ]);
+                ->setFormType(NewPasswordType::class);
         }
     }
 }
