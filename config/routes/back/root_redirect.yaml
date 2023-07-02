@@ -1,6 +1,0 @@
-root:
-    path: /admin/
-    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
-    defaults:
-        path: /admin/dashboard
-        permanent: true

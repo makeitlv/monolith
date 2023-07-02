@@ -35,10 +35,47 @@
                             href="{{ path('front.homepage') }}">
                             {% trans %}Home{% endtrans %}
                         </a>
+
                         <a class="nav-link fw-bold py-1 px-0"
                             href="{{ path('back.dashboard') }}">
                             {% trans %}Admin{% endtrans %}
                         </a>
+
+                        <div class="dropdown">
+                            <a class="btn btn-outline-light dropdown-toggle ms-3 mx-0"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <b>{{ app.request.locale|upper }}</b>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                {% for locale in locales|split('|') %}
+                                    <li>
+                                        <a href="{{
+                                            path(
+                                                app.request.attributes.get(
+                                                    '_route'
+                                                ),
+                                                app.request.attributes.get(
+                                                    '_route_params'
+                                                )
+                                                    |merge(
+                                                        app.request.query.all
+                                                    )
+                                                    |merge({
+                                                        _locale: locale
+                                                    })
+                                            )
+                                            }}"
+                                            class="dropdown-item">
+                                            {{ locale|upper }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -59,5 +96,9 @@
                 </p>
             </div>
         </footer>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('front') }}
+        {% endblock %}
     </body>
 </html>

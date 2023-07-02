@@ -5,3 +5,20 @@ back_directory:
 front_directory:
     resource: "routes/front/"
     type: directory
+    prefix: "/{_locale}"
+    requirements:
+        _locale: "%app.locale%"
+
+back_root:
+    path: /admin/
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /admin/dashboard
+        permanent: true
+
+root_homepage:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en
+        permanent: true
