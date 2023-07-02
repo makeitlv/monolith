@@ -1,9 +1,6 @@
-{% extends 'mail/layout/base.html.twig' %}
+{% trans_default_domain 'notice' %}
 
-{% trans_default_domain constant(
-    'App\\Common\\Infrastructure\\Translation\\Notice\\TranslatableMessage::DOMAIN'
-)
-%}
+{% extends 'mail/layout/base.html.twig' %}
 
 {% block title %}
     {{ subject }}

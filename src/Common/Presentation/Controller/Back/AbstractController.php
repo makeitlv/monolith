@@ -6,7 +6,6 @@ namespace App\Common\Presentation\Controller\Back;
 
 use App\Common\Domain\Exception\DomainException;
 use App\Common\Domain\Translation\TranslatableMessage;
-use App\Common\Presentation\Translation\Back\TranslatableMessage as BackTranslatableMessage;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use RuntimeException;
@@ -74,15 +73,27 @@ abstract class AbstractController extends AbstractCrudController
             };
 
             $translatableMessage = match ($type) {
-                "createAction" => new BackTranslatableMessage('Content "%name%" has been created!', [
-                    "%name%" => (string) $entityInstance,
-                ]),
-                "updateAction" => new BackTranslatableMessage('Content "%name%" has been updated!', [
-                    "%name%" => (string) $entityInstance,
-                ]),
-                "deleteAction" => new BackTranslatableMessage('Content "%name%" has been deleted!', [
-                    "%name%" => (string) $entityInstance,
-                ]),
+                "createAction" => new TranslatableMessage(
+                    'Content "%name%" has been created!',
+                    [
+                        "%name%" => (string) $entityInstance,
+                    ],
+                    "back"
+                ),
+                "updateAction" => new TranslatableMessage(
+                    'Content "%name%" has been updated!',
+                    [
+                        "%name%" => (string) $entityInstance,
+                    ],
+                    "back"
+                ),
+                "deleteAction" => new TranslatableMessage(
+                    'Content "%name%" has been deleted!',
+                    [
+                        "%name%" => (string) $entityInstance,
+                    ],
+                    "back"
+                ),
             };
 
             $this->addSuccessFlash($translatableMessage);
@@ -91,9 +102,12 @@ abstract class AbstractController extends AbstractCrudController
         } catch (DomainException $exception) {
             $this->addErrorFlash($exception->getTranslatableMessage());
         } catch (Throwable $exception) {
-            dump($exception);
             $this->addErrorFlash(
-                new BackTranslatableMessage("Something went wrong! Please, contact with administrator to figure out.")
+                new TranslatableMessage(
+                    "Something went wrong! Please, contact with administrator to figure out.",
+                    [],
+                    "back"
+                )
             );
         }
     }

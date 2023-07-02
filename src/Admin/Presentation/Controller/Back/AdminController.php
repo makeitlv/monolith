@@ -16,7 +16,7 @@ use App\Admin\Presentation\Model\AdminModel;
 use App\Admin\Infrastructure\Adapter\Security\SecurityAdapter;
 use App\Common\Domain\Bus\Command\CommandBus;
 use App\Common\Presentation\Controller\Back\AbstractController;
-use App\Common\Presentation\Translation\Back\TranslatableMessage;
+use App\Common\Domain\Translation\TranslatableMessage;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -128,7 +128,7 @@ class AdminController extends AbstractController
             $admin = $adminContext->getEntity()->getInstance();
             $this->bus->dispatch(new ActivateAdminCommand($admin->uuid));
 
-            $this->addFlash("success", new TranslatableMessage("Admin activated."));
+            $this->addFlash("success", new TranslatableMessage("Admin activated.", [], "back"));
         });
     }
 
@@ -139,7 +139,7 @@ class AdminController extends AbstractController
             $admin = $adminContext->getEntity()->getInstance();
             $this->bus->dispatch(new BlockAdminCommand($admin->uuid));
 
-            $this->addFlash("success", new TranslatableMessage("Admin blocked."));
+            $this->addFlash("success", new TranslatableMessage("Admin blocked.", [], "back"));
         });
     }
 
@@ -150,7 +150,7 @@ class AdminController extends AbstractController
             $admin = $adminContext->getEntity()->getInstance();
             $this->bus->dispatch(new UnblockAdminCommand($admin->uuid));
 
-            $this->addFlash("success", new TranslatableMessage("Admin unblocked."));
+            $this->addFlash("success", new TranslatableMessage("Admin unblocked.", [], "back"));
         });
     }
 
@@ -163,7 +163,7 @@ class AdminController extends AbstractController
                 new GenerateAdminPasswordCommand($admin->uuid, $admin->email, $admin->firstname, $admin->lastname)
             );
 
-            $this->addFlash("success", new TranslatableMessage("Admin password reset."));
+            $this->addFlash("success", new TranslatableMessage("Admin password reset.", [], "back"));
         });
     }
 

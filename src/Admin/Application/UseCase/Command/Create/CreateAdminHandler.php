@@ -29,9 +29,13 @@ readonly final class CreateAdminHandler implements CommandHandler
     {
         if ($this->adminRepository->findByEmail($command->email)) {
             throw new DomainException(
-                new TranslatableMessage("Admin already exists with such email %email%.", [
-                    "%email%" => $command->email,
-                ])
+                new TranslatableMessage(
+                    "Admin already exists with such email %email%.",
+                    [
+                        "%email%" => $command->email,
+                    ],
+                    "domain"
+                )
             );
         }
 

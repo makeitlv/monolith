@@ -1,9 +1,6 @@
-{% extends 'back/layout/base.html.twig' %}
+{% trans_default_domain 'back' %}
 
-{% trans_default_domain constant(
-    'App\\Common\\Presentation\\Translation\\Back\\TranslatableMessage::DOMAIN'
-)
-%}
+{% extends 'back/layout/base.html.twig' %}
 
 {% block main %}
     <main>

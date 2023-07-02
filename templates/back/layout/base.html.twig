@@ -1,7 +1,4 @@
-{% trans_default_domain constant(
-    'App\\Common\\Presentation\\Translation\\Back\\TranslatableMessage::DOMAIN'
-)
-%}
+{% trans_default_domain 'back' %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +22,7 @@
             href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫</text></svg>" />
 
         {% block stylesheets %}
-            {{ encore_entry_link_tags('front') }}
+            {{ encore_entry_link_tags('front') }} {# TODO: fix to back #}
         {% endblock %}
     </head>
 

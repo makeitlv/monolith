@@ -27,7 +27,7 @@ readonly final class UpdateAdminPasswordHandler implements CommandHandler
 
         if (!$admin instanceof Admin) {
             throw new DomainException(
-                new TranslatableMessage("Admin not found! Uuid: %uuid%.", ["%uuid%" => $command->uuid])
+                new TranslatableMessage("Admin not found! Uuid: %uuid%.", ["%uuid%" => $command->uuid], "domain")
             );
         }
 

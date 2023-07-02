@@ -32,6 +32,7 @@ services:
             - "../src/DependencyInjection/"
             - "../src/Entity/"
             - "../src/Kernel.php"
+            - "../src/functions.php"
 
     App\Common\Infrastructure\Bus\Command\SyncCommandBus:
         arguments:

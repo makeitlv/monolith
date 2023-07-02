@@ -67,11 +67,11 @@ class Admin extends Aggregate implements AggregateInterface
     public function activate(): void
     {
         if ($this->status === Status::ACTIVATED) {
-            throw new DomainException(new TranslatableMessage("Admin is already activated."));
+            throw new DomainException(new TranslatableMessage("Admin is already activated.", [], "domain"));
         }
 
         if ($this->status === Status::BLOCKED) {
-            throw new DomainException(new TranslatableMessage("Admin is blocked."));
+            throw new DomainException(new TranslatableMessage("Admin is blocked.", [], "domain"));
         }
 
         $this->status = Status::ACTIVATED;
@@ -82,11 +82,13 @@ class Admin extends Aggregate implements AggregateInterface
     public function block(): void
     {
         if ($this->status === Status::BLOCKED) {
-            throw new DomainException(new TranslatableMessage("Admin is already blocked."));
+            throw new DomainException(new TranslatableMessage("Admin is already blocked.", [], "domain"));
         }
 
         if ($this->role->value === Role::ROLE_SUPER_ADMIN->value) {
-            throw new DomainException(new TranslatableMessage("It is not possible to block the superadmin."));
+            throw new DomainException(
+                new TranslatableMessage("It is not possible to block the superadmin.", [], "domain")
+            );
         }
 
         $this->status = Status::BLOCKED;
@@ -96,7 +98,7 @@ class Admin extends Aggregate implements AggregateInterface
     public function unblock(): void
     {
         if ($this->status !== Status::BLOCKED) {
-            throw new DomainException(new TranslatableMessage("Admin is not blocked."));
+            throw new DomainException(new TranslatableMessage("Admin is not blocked.", [], "domain"));
         }
 
         $this->status = $this->confirmationToken === null ? Status::ACTIVATED : Status::DISABLED;

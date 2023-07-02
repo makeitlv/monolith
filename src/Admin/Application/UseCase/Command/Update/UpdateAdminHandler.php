@@ -22,16 +22,20 @@ readonly final class UpdateAdminHandler implements CommandHandler
 
         if (!$admin instanceof Admin) {
             throw new DomainException(
-                new TranslatableMessage("Admin not found! Uuid: %uuid%.", ["%uuid%" => $command->uuid])
+                new TranslatableMessage("Admin not found! Uuid: %uuid%.", ["%uuid%" => $command->uuid], "domain")
             );
         }
 
         $existingAdmin = $this->adminRepository->findByEmail($command->email);
         if ($existingAdmin && $admin->equals($existingAdmin) === false) {
             throw new DomainException(
-                new TranslatableMessage("Admin already exists with such email %email%.", [
-                    "%email%" => $command->email,
-                ])
+                new TranslatableMessage(
+                    "Admin already exists with such email %email%.",
+                    [
+                        "%email%" => $command->email,
+                    ],
+                    "domain"
+                )
             );
         }
 

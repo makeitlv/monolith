@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Notification\Infrastructure\Service\Admin\AdminPasswordChanged;
 
 use App\Common\Domain\Bus\Event\Event;
-use App\Common\Infrastructure\Translation\Notice\TranslatableMessage;
+use App\Common\Domain\Translation\TranslatableMessage;
 use App\Notification\Application\Service\NotifierInterface;
 use App\Notification\Domain\Event\External\Admin\AdminPasswordChangedEvent;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -20,7 +20,7 @@ readonly final class AdminPasswordChangedEmailNotifier implements NotifierInterf
     public function notify(Event $event): void
     {
         /** @var AdminPasswordChangedEvent $event */
-        $subject = new TranslatableMessage("Your password changed!");
+        $subject = new TranslatableMessage("Your password changed!", [], "notice");
 
         $email = (new TemplatedEmail())
             ->to($event->email)

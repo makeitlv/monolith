@@ -6,17 +6,15 @@ namespace App\Common\Domain\Translation;
 
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use RuntimeException;
 
 class TranslatableMessage implements TranslatableInterface
 {
-    /** @var string */
-    public const DOMAIN = "domain";
-
-    protected string $domain;
-
-    public function __construct(private string $message, private array $parameters = [])
+    public function __construct(private string $message, private array $parameters = [], private ?string $domain = null)
     {
-        $this->domain = static::DOMAIN;
+        if (!$this->domain) {
+            throw new RuntimeException("Important to set translation domain parameter.");
+        }
     }
 
     public function __toString(): string
