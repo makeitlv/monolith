@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="ru">
+  <file id="front.ru">
+    <unit id="OnhpU4i" name="Home">
+      <notes>
+        <note category="file-source" priority="1">app/templates/front/layout/base.html.twig:36</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Home</source>
+        <target>Главная</target>
+      </segment>
+    </unit>
+    <unit id="wcIksDz" name="Admin">
+      <notes>
+        <note category="file-source" priority="1">app/templates/front/layout/base.html.twig:41</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Admin</source>
+        <target>Админ часть</target>
+      </segment>
+    </unit>
+    <unit id="JhfCXvY" name="Modular monolith on PHP and Symfony">
+      <notes>
+        <note category="file-source" priority="1">app/templates/front/page/homepage/index.html.twig:10</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Modular monolith on PHP and Symfony</source>
+        <target>Модульный монолит на PHP и Symfony</target>
+      </segment>
+    </unit>
+    <unit id="1PMFkKj">
+      <notes>
+        <note category="file-source" priority="1">app/templates/front/page/homepage/index.html.twig:13</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>This is how should look modular monolith project
+                    using PHP, Symfony and following best practices: Hexagonal
+                    Architecture, SOLID, DDD, CQRS, KISS</source>
+        <target>Вот как должен выглядеть проект модульного монолита с использованием PHP, Symfony и лучших практик: Hexagonal Architecture, SOLID, DDD, CQRS, KISS.</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

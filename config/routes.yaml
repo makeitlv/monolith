@@ -9,6 +9,10 @@ front_directory:
     requirements:
         _locale: "%app.locale%"
 
+_translation_webui:
+    resource: "@TranslationBundle/Resources/config/routing_webui.yaml"
+    prefix: /admin
+
 back_root:
     path: /admin/
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction

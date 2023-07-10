@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="ru">
+  <file id="notice.ru">
+    <unit id="vrEDGTO" name="New password:">
+      <notes>
+        <note category="file-source" priority="1">app/templates/mail/admin/password/index.html.twig:19</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>New password:</source>
+        <target>Новый пароль:</target>
+      </segment>
+    </unit>
+    <unit id="BViBrGd" name="Important!">
+      <notes>
+        <note category="file-source" priority="1">app/templates/mail/admin/password/index.html.twig:23</note>
+        <note category="file-source" priority="1">app/templates/mail/admin/welcome/index.html.twig:29</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Important!</source>
+        <target>Важно!</target>
+      </segment>
+    </unit>
+    <unit id="XR4WSkD" name="Change your password after logging in.">
+      <notes>
+        <note category="file-source" priority="1">app/templates/mail/admin/password/index.html.twig:25</note>
+        <note category="file-source" priority="1">app/templates/mail/admin/welcome/index.html.twig:31</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Change your password after logging in.</source>
+        <target>Измените свой пароль после входа в систему.</target>
+      </segment>
+    </unit>
+    <unit id="3lU8jFu" name="A new admin account has been created for you. Your&#10;            credentials:">
+      <notes>
+        <note category="file-source" priority="1">app/templates/mail/admin/welcome/index.html.twig:19</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>A new admin account has been created for you. Your
+            credentials:</source>
+        <target>Для вас создана новая учетная запись администратора. Ваши учетные данные:</target>
+      </segment>
+    </unit>
+    <unit id="OAbWHDQ" name="Username:">
+      <notes>
+        <note category="file-source" priority="1">app/templates/mail/admin/welcome/index.html.twig:24</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Username:</source>
+        <target>Имя пользователя:</target>
+      </segment>
+    </unit>
+    <unit id="Vpskgqa" name="Password:">
+      <notes>
+        <note category="file-source" priority="1">app/templates/mail/admin/welcome/index.html.twig:25</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Password:</source>
+        <target>Пароль:</target>
+      </segment>
+    </unit>
+    <unit id="JEM8cOu" name="Activate">
+      <notes>
+        <note category="file-source" priority="1">app/templates/mail/admin/welcome/index.html.twig:50</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Activate</source>
+        <target>Активировать</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="ru">
+  <file id="security.ru">
+    <unit id="SiGPqoY" name="Your profile successfully&#10;                    activated!">
+      <notes>
+        <note category="file-source" priority="1">app/templates/back/page/auth/confirmation.html.twig:10</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Your profile successfully
+                    activated!</source>
+        <target>Ваш профиль успешно активирован!</target>
+      </segment>
+    </unit>
+    <unit id="wLYGTp7" name="Confirmation token is invalid!">
+      <notes>
+        <note category="file-source" priority="1">app/templates/back/page/auth/confirmation.html.twig:15</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Confirmation token is invalid!</source>
+        <target>Токен подтверждения недействителен!</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
