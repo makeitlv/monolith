@@ -18,6 +18,9 @@ class DashboardMenuItem
         yield MenuItem::section("Main");
         yield MenuItem::linkToDashboard("Dashboard", "fa fa-home");
 
+        yield MenuItem::section("Content Management");
+        yield MenuItem::linkToUrl("Translation", "fa fa-language", $urlGenerator->generate("translation_index"));
+
         yield MenuItem::section("Access Control");
         yield MenuItem::linkToCrud("Admin", "fa fa-user", AdminModel::class);
 
