@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security\Infrastructure\EventSubscriber\Back;
 
+use App\Common\Domain\Translation\TranslatableMessage;
 use App\Security\Infrastructure\Provider\Back\AdminIdentity;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -42,7 +43,9 @@ final class SecuritySubscriber implements EventSubscriberInterface
             /** @var Session $session */
             $session = $request->getSession();
 
-            $session->getFlashBag()->add("warning", "Please, change your password!");
+            $session
+                ->getFlashBag()
+                ->add("warning", new TranslatableMessage("Please, change your password!", [], "security"));
         }
     }
 }
